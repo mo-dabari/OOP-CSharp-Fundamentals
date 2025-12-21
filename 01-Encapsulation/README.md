@@ -410,20 +410,3 @@ var person = new Person("123");
     }
 }
   ```
-  ---
-
-
-
-
-
-
-## 📊 Progress Tracker
-
-| Concept | Examples | Exercises | Real-World | Status |
-|---------|----------|-----------|------------|--------|
-| Encapsulation | ✅ | ✅ | ✅ | Complete |
-| Abstraction | ✅ | ✅ | ✅ | Complete |
-| Inheritance | 🔄 | 🔄 | ⏳ | In Progress |
-| Polymorphism | ⏳ | ⏳ | ⏳ | Planned |
-
----
