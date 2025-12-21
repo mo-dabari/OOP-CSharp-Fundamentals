@@ -1,0 +1,17 @@
+# Visual Studio files
+.vs/
+*.user
+*.suo
+
+# Build folders
+bin/
+obj/
+Debug/
+Release/
+
+# NuGet packages
+packages/
+*.nupkg
+
+# Others
+*.log
