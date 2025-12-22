@@ -14,6 +14,7 @@ Encapsulation هو مبدأ OOP يهدف إلى:
 - Access Modifiers (private, protected, public)
 - Properties
 - Methods
+```
 ┌─────────────────────────────────┐
 │        Object                   │
 ├─────────────────────────────────┤
@@ -24,7 +25,7 @@ Encapsulation هو مبدأ OOP يهدف إلى:
 │  - GetName()                    │
 │  - SetAge()                     │
 └─────────────────────────────────┘
-
+```
 ---
 
 2. What Problem Does Encapsulation Solve ?
@@ -410,4 +411,5 @@ var person = new Person("123");
     }
 }
   ```
+
 
