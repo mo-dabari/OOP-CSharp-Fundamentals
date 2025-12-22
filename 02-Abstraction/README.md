@@ -18,7 +18,7 @@
 ---
 
 ## المفاهيم الأساسية
----
+
 ### 1. الفرق بين Abstraction و Encapsulation
 
 - Abstraction: 
