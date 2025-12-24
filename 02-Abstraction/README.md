@@ -130,14 +130,14 @@ public class Cat : IAnimal
 ### Abstract Class vs Interface
 
 ```
-| Feature / Capability        | Abstract Class | Interface |
-|----------------------------|----------------|-----------|
-| Multiple Inheritance       | ❌ No          | ✅ Yes    |
-| State (Fields / Data)      | ✅ Yes         | ❌ No (C# 7 and earlier) |
-| Access Modifiers           | ✅ All         | ⚠️ Public only (by default) |
-| Constructor                | ✅ Yes         | ❌ No     |
-| Static Members             | ✅ Yes         | ✅ Yes (C# 11+) |
-| Usage / Relationship       | IS-A Relationship          | IS-A Behavior     |
+| Feature / Capability       | Abstract Class     | Interface                    |
+|----------------------------|----------------    |-----------                   |
+| Multiple Inheritance       | ❌ No              | ✅ Yes                       |
+| State (Fields / Data)      | ✅ Yes             | ❌ No (C# 7 and earlier)     |
+| Access Modifiers           | ✅ All             | ⚠️ Public only (by default)  |
+| Constructor                | ✅ Yes             | ❌ No                        |
+| Static Members             | ✅ Yes             | ✅ Yes (C# 11+)              |
+| Usage / Relationship       | IS-A Relationship  | IS-A Behavior                |    
 
 ```
 ---
