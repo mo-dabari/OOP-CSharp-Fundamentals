@@ -1,6 +1,6 @@
 # 🎯 OOP in C# - Abstraction
 
-<div dir="rtl">
+<div dir="rtl"></div>
 مقدمة عن التجريد
 هو مفهوم أساسي في البرمجة الكائنية التوجه يعني إخفاء التفاصيل المعقدة وعرض فقط الواجهةبكلمات أخرى نركز على:
 
@@ -70,7 +70,7 @@ public abstract class PaymentProcessor
 
 ### Example:
 ```
-public class Animal
+public abstract class Animal
 {
     // method مجردة - بدون تطبيق
     public abstract void MakeSound();
@@ -94,7 +94,7 @@ public class Dog : Animal
 
 
 **2.2 Interfaces:**
-هى عثد تحدد مجموعة من ال Members (Methods, Properties) بدون تطبيق 
+هى عند تحدد مجموعة من ال Members (Methods, Properties) بدون تطبيق 
 
 **الخصائص:**
 - members مجردة (في C# 7 والأقدم)
@@ -112,7 +112,7 @@ public interface IAnimal
 }
 
 // فئة تنفذ الواجهة
-public class Cat : Animal
+public class Cat : IAnimal
 {
     public override void MakeSound()
     {
@@ -142,7 +142,7 @@ public class Cat : Animal
 ```
 ---
 
-### Abstruaction Benefites
+### Abstraction Benefits
 
 1. Simplify the code
 ```
@@ -326,7 +326,7 @@ public class CloudLogger : ILogger { }
 ```
 ---
 
-### without Abstruction (X) :(
+### without Abstraction (X) :(
 ```
 public class Order
 {
@@ -373,5 +373,5 @@ public class Order
 }
 ```
 ---
-</div>
+
 
