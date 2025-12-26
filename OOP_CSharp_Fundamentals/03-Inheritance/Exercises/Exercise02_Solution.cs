@@ -7,19 +7,21 @@ namespace Inheritance.Examples
     public abstract class Document
     {
 
-        public string Title {get;}
-        public string Author {get;}
-        public DateOnly DateCreated {get;}
+        public string Title { get; }
+        public string Author { get; }
+        public DateOnly DateCreated { get; }
 
-        public Document(string title , string author , DateOnly dateCreated)
+        public Document(string title, string author, DateOnly dateCreated)
         {
-            if(string.IsNullOrWhiteSpace(title, author))
-                throw new InvalidOperationException("Must Be Required title, author");
 
-            if(dateCreated is null)
-                throw new InvalidOperationException("Must Be Required Date Created");
+            ArgumentException.ThrowIfNullOrWhiteSpace(title, nameof(title));
+            ArgumentException.ThrowIfNullOrWhiteSpace(author, nameof(author));
 
-            if(dateCreated > DateOnly.FromDateTime(DateTime.Now))
+            if (dateCreated == default(DateOnly))
+                throw new ArgumentException("Date cannot be empty");
+
+
+            if (dateCreated > DateOnly.FromDateTime(DateTime.Now))
                 throw new InvalidOperationException("Invalid Date Must Be smaller Than Today or Equale Today");
 
             Title = title;
@@ -52,16 +54,16 @@ namespace Inheritance.Examples
     public class TextFile : Document
     {
 
-        public TextFile(string title , string author , DateOnly dateCreated)
-        : base(title, author, dateCreated){}
+        public TextFile(string title, string author, DateOnly dateCreated)
+        : base(title, author, dateCreated) { }
         public override void Open()
         {
-            Console.WriteLine($"📝 فتح محرر نصوص: {title}");
+            Console.WriteLine($"📝 فتح محرر نصوص: {Title}");
         }
 
         public override void Save()
         {
-            Console.WriteLine($"💾 حفظ الملف النصي: {title}");
+            Console.WriteLine($"💾 حفظ الملف النصي: {Title}");
         }
     }
 
@@ -69,21 +71,21 @@ namespace Inheritance.Examples
     public class PDFDocument : Document
     {
 
-        public PDFDocument(string title , string author , DateOnly dateCreated)
-        : base(title, author, dateCreated){}
+        public PDFDocument(string title, string author, DateOnly dateCreated)
+        : base(title, author, dateCreated) { }
 
         public void Compress()
         {
-            Console.WriteLine($"🗜️  ضغط PDF: {title}");
+            Console.WriteLine($"🗜️  ضغط PDF: {Title}");
         }
 
         public override void Open()
         {
-            Console.WriteLine($"📄 فتح قارئ PDF: {title}");
+            Console.WriteLine($"📄 فتح قارئ PDF: {Title}");
         }
         public override void Print()
         {
-            Console.WriteLine($"🖨️  طباعة PDF: {title}");
+            Console.WriteLine($"🖨️  طباعة PDF: {Title}");
         }
     }
 
@@ -91,22 +93,22 @@ namespace Inheritance.Examples
     public class ExcelDocument : Document
     {
 
-        public ExcelDocument(string title , string author , DateOnly dateCreated)
-        : base(title, author, dateCreated){}
+        public ExcelDocument(string title, string author, DateOnly dateCreated)
+        : base(title, author, dateCreated) { }
 
         public override void Open()
         {
-            Console.WriteLine($"📊 فتح جدول بيانات: {title}");
+            Console.WriteLine($"📊 فتح جدول بيانات: {Title}");
         }
-        
+
         public override void Save()
         {
-            Console.WriteLine($"💾 حفظ جدول البيانات: {title}");
+            Console.WriteLine($"💾 حفظ جدول البيانات: {Title}");
         }
-        
+
         public void CalculateFormulas()
         {
-            Console.WriteLine($"🧮 حساب الصيغ في: {title}");
+            Console.WriteLine($"🧮 حساب الصيغ في: {Title}");
         }
     }
 
@@ -114,60 +116,59 @@ namespace Inheritance.Examples
     public class PowerPointPresentation : Document
     {
 
-        public PowerPointPresentation(string title , string author , DateOnly dateCreated)
-        : base(title, author, dateCreated){}
+        public PowerPointPresentation(string title, string author, DateOnly dateCreated)
+        : base(title, author, dateCreated) { }
         public override void Open()
         {
-            Console.WriteLine($"🎬 فتح عرض الشرائح: {title}");
+            Console.WriteLine($"🎬 فتح عرض الشرائح: {Title}");
         }
-        
+
         public void StartPresentation()
         {
-            Console.WriteLine($"▶️  بدء العرض: {title}");
+            Console.WriteLine($"▶️  بدء العرض: {Title}");
         }
     }
 
 
     public class DocumentManager
     {
-        private List<Document> _documents;
-        public IReadOnlyList values;
+        private List<Document> _documents = new();
+        public IReadOnlyList<Document> values;
 
-        public DocumentManager(List<Document> Documents)
+        public DocumentManager()
         {
-            _documents = Documents;
             values = _documents;
         }
         public void AddDocument(Document doc)
         {
-            if(doc is null)
+            if (doc is null)
                 throw new NullReferenceException();
             _documents.Add(doc);
             Console.WriteLine($"✅ تم إضافة المستند{doc.GetInfo()}");
         }
-        public void  OpenAll()
+        public void OpenAll()
         {
             Console.WriteLine("\n📂 فتح جميع المستندات:");
-            foreach (var doc in documents)
+            foreach (var doc in _documents)
                 doc.Open();
         }
         public void SaveAll()
         {
             Console.WriteLine("\n💾 حفظ جميع المستندات:");
-            foreach (var doc in documents)
+            foreach (var doc in _documents)
                 doc.Save();
         }
 
         public void PrintAll()
         {
             Console.WriteLine("\n🖨️  طباعة جميع المستندات:");
-            foreach (var doc in documents)
+            foreach (var doc in _documents)
                 doc.Print();
         }
         public void PrintDocumentsInfo()
         {
             Console.WriteLine("\n📋 معلومات المستندات:");
-            foreach (var doc in documents)
+            foreach (var doc in _documents)
                 Console.WriteLine($"  • {doc.GetInfo()}");
         }
     }

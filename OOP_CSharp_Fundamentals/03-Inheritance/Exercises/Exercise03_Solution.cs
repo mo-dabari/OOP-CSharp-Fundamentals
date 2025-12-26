@@ -8,40 +8,40 @@ namespace Inheritance.Examples
     public abstract class Vehicle
     {
 
-        public string Color {get;}
-        public string Brand {get;}
-        public double Speed {get;}
+        public string Color { get; }
+        public string Brand { get; }
+        public double Speed { get; }
 
-        public Vehicle(string color , string brand , double speed)
+        public Vehicle(string color, string brand, double speed)
         {
-            if(string.IsNullOrWhiteSpace(color, brand))
-                throw new ArgumentNullException("Must Be Required color, brand");
+            ArgumentException.ThrowIfNullOrWhiteSpace(color, nameof(color));
+            ArgumentException.ThrowIfNullOrWhiteSpace(brand, nameof(brand));
 
-            if(speed <= 40)
-                throw new InvalidEnumArgumentException("Invalid Date Must Be Larger Than 40");
+            if (speed <= 40)
+                throw new ArgumentOutOfRangeException(nameof(speed), "Invalid Date Must Be Larger Than 40");
 
             Color = color;
             Brand = brand;
             Speed = speed;
         }
 
-        public virtual void Start() => Console.WriteLine($"{brand} ({color}) يبدأ التشغيل");
+        public virtual void Start() => Console.WriteLine($"{Brand} ({Color}) يبدأ التشغيل");
 
-        public virtual void Stop() => Console.WriteLine($"{brand} يتوقف");
-            
-        public virtual double GetSpeed() => speed;
+        public virtual void Stop() => Console.WriteLine($"{Brand} يتوقف");
 
-        public virtual string GetInfo() => $"{brand} ({color})";
+        public virtual double GetSpeed() => Speed;
+
+        public virtual string GetInfo() => $"{Brand} ({Color})";
     }
 
 
     public class Car : Vehicle
     {
         public byte NumberOfDoors { get; }
-        public Car(string color , string brand , double speed , byte numberOfDoors)
+        public Car(string color, string brand, double speed, byte numberOfDoors)
         : base(color, brand, speed)
         {
-            if(numberOfDoors < 2)
+            if (numberOfDoors < 2)
                 throw new ArgumentException("Must Be Number Of Doors 2 Or 4");
 
             NumberOfDoors = numberOfDoors;
@@ -49,7 +49,7 @@ namespace Inheritance.Examples
 
         public override void Start()
         {
-            Console.WriteLine($"🚗 سيارة {brand}: برووووم!");
+            Console.WriteLine($"🚗 سيارة {Brand}: برووووم!");
         }
 
         public override void Stop()
@@ -60,7 +60,7 @@ namespace Inheritance.Examples
 
         public override string GetInfo()
         {
-            return base.GetInfo() + $" - {numberOfDoors} أبواب";
+            return base.GetInfo() + $" - {NumberOfDoors} أبواب";
         }
     }
 
@@ -68,7 +68,7 @@ namespace Inheritance.Examples
     public class Motorcycle : Vehicle
     {
         public bool HasStorage { get; }
-        public Motorcycle(string color , string brand , double speed , bool hasStorage)
+        public Motorcycle(string color, string brand, double speed, bool hasStorage)
         : base(color, brand, speed)
         {
             HasStorage = hasStorage;
@@ -76,54 +76,53 @@ namespace Inheritance.Examples
 
         public override void Start()
         {
-            Console.WriteLine($"🏍️  دراجة {brand}: ووووووووم!");
+            Console.WriteLine($"🏍️  دراجة {Brand}: ووووووووم!");
         }
 
         public override void Stop()
         {
             base.Stop();
-            Console.WriteLine($"   {(hasStorage ? "خزان مملوء" : "بدون خزان")}");
+            Console.WriteLine($"   {(HasStorage ? "خزان مملوء" : "بدون خزان")}");
         }
     }
 
 
     public class Truck : Vehicle
     {
-        public double loadCapacity { get; }
-        public Truck(string color , string brand , double speed , byte loadCapacity)
+        public double LoadCapacity { get; }
+        public Truck(string color, string brand, double speed, double loadCapacity)
         : base(color, brand, speed)
         {
-            if(loadCapacity <= 0)
-                throw new ArgumentException("Must Be load Capacity Grater Than 0");
+            ArgumentOutOfRangeException.ThrowIfNegativeOrZero(loadCapacity, nameof(loadCapacity));
 
             LoadCapacity = loadCapacity;
         }
 
         public override void Start()
         {
-            Console.WriteLine($"🚚 شاحنة {brand}: بررررررم!");
+            Console.WriteLine($"🚚 شاحنة {Brand}: بررررررم!");
         }
 
-        public void LoadCargo(decimal weight)
+        public void LoadCargo(double weight)
         {
-            if(weight <= 0)
+            if (weight <= 0)
                 throw new ArgumentException("Must Be weight Grater Than 0 and smaller than load Capacity or Equle");
 
-            if (weight <= loadCapacity)
+            if (weight <= LoadCapacity)
                 Console.WriteLine($"📦 تحميل البضاعة: {weight} طن");
             else
-                Console.WriteLine($"❌ وزن البضاعة أكثر من الحد ({loadCapacity} طن)");
+                Console.WriteLine($"❌ وزن البضاعة أكثر من الحد ({LoadCapacity} طن)");
         }
     }
 
 
-        public class ElectricCar : Car
+    public class ElectricCar : Car
     {
         public short BatteryCapacity { get; }
-        public ElectricCar(string color , string brand , double speed , byte numberOfDoors , short batteryCapacity)
+        public ElectricCar(string color, string brand, double speed, byte numberOfDoors, short batteryCapacity)
         : base(color, brand, speed, numberOfDoors)
         {
-            if(batteryCapacity <= 0)
+            if (batteryCapacity <= 0)
                 throw new ArgumentException("Must Be Battery Capacity Grater Than 0");
 
             BatteryCapacity = batteryCapacity;
@@ -131,17 +130,17 @@ namespace Inheritance.Examples
 
         public override void Start()
         {
-            Console.WriteLine($"⚡ سيارة كهربائية {brand}: وووووم هادئ!");
+            Console.WriteLine($"⚡ سيارة كهربائية {Brand}: وووووم هادئ!");
         }
-        
+
         public void Charge()
         {
-            Console.WriteLine($"🔌 شحن البطارية: {batteryCapacity}%");
+            Console.WriteLine($"🔌 شحن البطارية: {BatteryCapacity}%");
         }
-        
+
         public override string GetInfo()
         {
-            return base.GetInfo() + $" - بطارية {batteryCapacity}%";
+            return base.GetInfo() + $" - بطارية {BatteryCapacity}%";
         }
     }
 
@@ -158,7 +157,7 @@ namespace Inheritance.Examples
 
         public void AddVehicles(Vehicle vehicle)
         {
-            ArgumentNullException.ThrowIfNullOrEmpty(vehicle);
+            ArgumentNullException.ThrowIfNull(vehicle);
 
             _vehicles.Add(vehicle);
         }
@@ -166,28 +165,28 @@ namespace Inheritance.Examples
         public void StartAll()
         {
             Console.WriteLine("\n🚗 بدء جميع المركبات:");
-            foreach (var vehicle in vehicles)
+            foreach (var vehicle in _vehicles)
                 vehicle.Start();
         }
 
         public void StopAll()
         {
             Console.WriteLine("\n⛔ إيقاف جميع المركبات:");
-            foreach (var vehicle in vehicles)
+            foreach (var vehicle in _vehicles)
                 vehicle.Stop();
         }
 
         public void PrintSpeedReport()
         {
             Console.WriteLine("\n📊 تقرير السرعات:");
-            foreach (var vehicle in vehicles)
+            foreach (var vehicle in _vehicles)
                 Console.WriteLine($"  • {vehicle.GetInfo()}: {vehicle.GetSpeed()} كم/س");
         }
 
         public void PrintFleetInfo()
         {
             Console.WriteLine("\n🚗 معلومات الأسطول:");
-            foreach (var vehicle in vehicles)
+            foreach (var vehicle in _vehicles)
                 Console.WriteLine($"  • {vehicle.GetInfo()}");
         }
     }

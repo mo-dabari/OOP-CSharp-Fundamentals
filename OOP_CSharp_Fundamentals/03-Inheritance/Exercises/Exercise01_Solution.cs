@@ -7,17 +7,17 @@ namespace Inheritance.Examples
     public abstract class Animal
     {
 
-        public string Name {get;}
-        public byte Age {get;}
+        public string Name { get; }
+        public byte Age { get; }
 
-        public Animal(string name , byte age)
+        public Animal(string name, byte age)
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
-            if(name.Length > 15)
+            if (name.Length > 15)
                 throw new InvalidOperationException("Must Be Name Animal Larger then 15 Characters");
 
-            if(age < 1 || age > 20)
+            if (age < 1 || age > 20)
                 throw new InvalidOperationException("Average the Age animal between 1 Day to 20 Years");
 
             Name = name;
@@ -26,22 +26,22 @@ namespace Inheritance.Examples
 
         public virtual void MakeSound()
         {
-            Console.WriteLine($"{name} يصدر صوت");
+            Console.WriteLine($"{Name} يصدر صوت");
         }
 
         public virtual void Move()
         {
-            Console.WriteLine($"{name} يتحرك");
+            Console.WriteLine($"{Name} يتحرك");
         }
 
         public virtual void Eat()
         {
-            Console.WriteLine($"{name} يأكل");
+            Console.WriteLine($"{Name} يأكل");
         }
 
         public virtual string GetInfo()
         {
-            return $"{name} ({age} سنة)";
+            return $"{Name} ({Age} سنة)";
         }
     }
 
@@ -49,7 +49,7 @@ namespace Inheritance.Examples
     public class Dog : Animal
     {
 
-        public Dog(string name , byte age) :base(name,age){} 
+        public Dog(string name, byte age) : base(name, age) { }
 
         public override void MakeSound()
         {
@@ -63,37 +63,37 @@ namespace Inheritance.Examples
 
         public override void Eat()
         {
-            Console.WriteLine($"🐕 {name} يأكل لحم");
+            Console.WriteLine($"🐕 {Name} يأكل لحم");
         }
 
         public void Fetch()
         {
-            Console.WriteLine($"🐕 {name} يجلب الكرة");
+            Console.WriteLine($"🐕 {Name} يجلب الكرة");
         }
     }
 
 
     public class Cat : Animal
     {
-        public Cat(string name , byte age) :base(name,age){} 
+        public Cat(string name, byte age) : base(name, age) { }
 
         public override void MakeSound()
         {
-            Console.WriteLine($"🐱 {name}: مياو!");
+            Console.WriteLine($"🐱 {Name}: مياو!");
         }
 
         public override void Move()
         {
-            Console.WriteLine($"🐱 {name} يمشي بخفة");
+            Console.WriteLine($"🐱 {Name} يمشي بخفة");
         }
 
         public override void Eat()
         {
-            Console.WriteLine($"🐱 {name} يأكل سمك");        
+            Console.WriteLine($"🐱 {Name} يأكل سمك");
         }
         public void Scratch()
         {
-            Console.WriteLine($"🐱 {name} يخدش الأثاث");
+            Console.WriteLine($"🐱 {Name} يخدش الأثاث");
         }
     }
 
@@ -101,23 +101,23 @@ namespace Inheritance.Examples
     public class Bird : Animal
     {
 
-        public Bird(string name , byte age) :base(name,age){} 
+        public Bird(string name, byte age) : base(name, age) { }
         public override void MakeSound()
         {
-            Console.WriteLine($"🐦 {name}: تيوت تيوت!");
+            Console.WriteLine($"🐦 {Name}: تيوت تيوت!");
         }
 
         public override void Move()
         {
-            Console.WriteLine($"🐦 {name} يطير في السماء");
+            Console.WriteLine($"🐦 {Name} يطير في السماء");
         }
         public override void Eat()
         {
-            Console.WriteLine($"🐦 {name} يأكل البذور");
+            Console.WriteLine($"🐦 {Name} يأكل البذور");
         }
         public void BuildNest()
         {
-            Console.WriteLine($"🐦 {name} يبني عش");
+            Console.WriteLine($"🐦 {Name} يبني عش");
         }
     }
 
@@ -125,7 +125,7 @@ namespace Inheritance.Examples
     public class AnimalSanctuary
     {
         private readonly List<Animal> _animals = new();
-        public IReadOnlyList values;
+        public IReadOnlyList<Animal> values;
 
         public AnimalSanctuary()
         {
@@ -133,41 +133,39 @@ namespace Inheritance.Examples
         }
         public void AddAnimal(Animal animal)
         {
-            ArgumentException.ThrowIfNullOrEmpty(animal);
+            ArgumentNullException.ThrowIfNull(animal, nameof(animal));
 
             _animals.Add(animal);
             Console.WriteLine($"✅ تم إضافة {animal.GetInfo()}");
         }
-        public void  MakeAllSounds()
+        public void MakeAllSounds()
         {
             Console.WriteLine("\n🔊 أصوات جميع الحيوانات:");
-            foreach(Animal animal in values)
+            foreach (Animal animal in values)
             {
-                Console.WriteLine(animal.MakeSound());
+                animal.MakeSound();
             }
         }
         public void MoveAll()
         {
             Console.WriteLine("\n🏃 جميع الحيوانات تتحرك:");
-            foreach(Animal animal in values)
+            foreach (Animal animal in values)
             {
-                Console.WriteLine(animal.Move());
+                animal.Move();
             }
         }
 
         public void FeedAll()
         {
             Console.WriteLine("\n🍽️  إطعام جميع الحيوانات:");
-            foreach (var animal in animals)
+            foreach (var animal in _animals)
                 animal.Eat();
         }
-       public void PrintAnimalInfo()
+        public void PrintAnimalInfo()
         {
             Console.WriteLine("\n📋 معلومات الحيوانات:");
-            foreach (var animal in animals)
+            foreach (var animal in _animals)
                 Console.WriteLine($"  • {animal.GetInfo()}");
         }
     }
-
-
 }
