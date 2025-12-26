@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
-namespace OOP_CSharp_Fundamentals
+namespace Inheritance.Examples
 {
     public abstract class Vehicle
     {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace OOP_CSharp_Fundamentals
+namespace Abstraction.Exercises
 {
     public interface IVehicle
     {

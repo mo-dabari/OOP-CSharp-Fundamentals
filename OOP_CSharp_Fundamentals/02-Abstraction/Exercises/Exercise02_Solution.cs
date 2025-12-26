@@ -1,3 +1,8 @@
+using System;
+using System.Collections.Generic;
+
+namespace Abstraction.Exercises
+{
 public interface INotification
     {
         bool Send(string recipient, string message);
@@ -110,3 +115,4 @@ public interface INotification
                 Console.WriteLine($"  {record}");
         }
     }
+}
