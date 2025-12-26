@@ -34,7 +34,7 @@ namespace Abstraction.Examples
     public abstract class Animal
     {
         // خاصية عامة - كل الحيوانات لديها اسم
-        public string Name { get; set; }
+        public string? Name { get; }
         public int Age { get; set; }
         
         // 🔴 Abstract Method - بدون تطبيق

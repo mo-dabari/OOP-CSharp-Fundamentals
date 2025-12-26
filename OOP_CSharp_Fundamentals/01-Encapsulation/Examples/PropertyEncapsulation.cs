@@ -36,9 +36,9 @@ namespace Encapsulation.Examples
     public class PersonSimple
     {
         // أبسط طريقة: Auto Properties
-        public string Name { get; set; }
+        public string Name { get; }
         public int Age { get; set; }
-        public string Email { get; set; }
+        public string? Email { get; }
         
         public override string ToString()
             => $"الاسم: {Name}, العمر: {Age}, البريد: {Email}";

@@ -6,8 +6,7 @@ namespace Encapsulation.RealWorldScenarios
 {
     public enum TransactionType
     {
-        Deposit,
-        Withdrawal
+        Deposit, Withdrawal
     }
 
     public class Transaction
@@ -42,10 +41,10 @@ namespace Encapsulation.RealWorldScenarios
 
         public BankAccount(string accountNumber, decimal initialBalance)
         {
-            if (string.IsNullOrWhiteSpace(accountNumber))
-            {
-                throw new ArgumentException("Account number cannot be null or whitespace");
-            }
+            ArgumentException.ThrowIfNullOrWhiteSpace(accountNumber, nameof(accountNumber));
+
+            ArgumentOutOfRangeException.ThrowIfNegativeOrZero(initialBalance, nameof(initialBalance));
+
             _accountNumber = accountNumber;
             _transactions = new List<Transaction>();
             Deposit(initialBalance);
@@ -53,22 +52,21 @@ namespace Encapsulation.RealWorldScenarios
 
         void Deposit(decimal amount)
         {
-            if (amount <= 0)
-                throw new ArgumentException("Deposit must be positive");
+            ArgumentOutOfRangeException.ThrowIfNegativeOrZero(amount, nameof(amount));
 
             _balance += amount;
-            _transactions.Add(new Transaction(amount, "Deposit"));
+            _transactions.Add(new Transaction(amount, TransactionType.Deposit));
         }
 
         void Withdraw(decimal amount)
         {
-            if (amount <= 0)
-                throw new ArgumentException("Withdrawal must be positive");
+            ArgumentOutOfRangeException.ThrowIfNegativeOrZero(amount, nameof(amount));
+
             if (amount > _balance)
                 throw new InvalidOperationException("Insufficient funds");
 
             _balance -= amount;
-            _transactions.Add(new Transaction(amount, "Withdrawal"));
+            _transactions.Add(new Transaction(amount, TransactionType.Withdrawal));
         }
     }
 }
