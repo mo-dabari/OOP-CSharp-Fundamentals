@@ -13,7 +13,7 @@
 
 using System;
 
-namespace OOP_CSharp_Fundamentals
+namespace Encapsulation.Examples
 {
     // ============================================
     // ❌ الطريقة الخاطئة - لا تفعل هذا!

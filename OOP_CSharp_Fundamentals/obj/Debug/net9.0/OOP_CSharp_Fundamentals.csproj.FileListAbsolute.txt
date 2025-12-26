@@ -1,0 +1,5 @@
+/media/dev-mo/New Volume/Programming/Dot_Net/repos/OOP-CSharp-Fundamentals/OOP_CSharp_Fundamentals/obj/Debug/net9.0/OOP_CSharp_Fundamentals.GeneratedMSBuildEditorConfig.editorconfig
+/media/dev-mo/New Volume/Programming/Dot_Net/repos/OOP-CSharp-Fundamentals/OOP_CSharp_Fundamentals/obj/Debug/net9.0/OOP_CSharp_Fundamentals.AssemblyInfoInputs.cache
+/media/dev-mo/New Volume/Programming/Dot_Net/repos/OOP-CSharp-Fundamentals/OOP_CSharp_Fundamentals/obj/Debug/net9.0/OOP_CSharp_Fundamentals.AssemblyInfo.cs
+/media/dev-mo/New Volume/Programming/Dot_Net/repos/OOP-CSharp-Fundamentals/OOP_CSharp_Fundamentals/obj/Debug/net9.0/OOP_CSharp_Fundamentals.csproj.CoreCompileInputs.cache
+/media/dev-mo/New Volume/Programming/Dot_Net/repos/OOP-CSharp-Fundamentals/OOP_CSharp_Fundamentals/obj/Debug/net9.0/OOP_CSharp_Fundamentals.sourcelink.json

@@ -19,7 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OOP_CSharp_Fundamentals
+namespace Abstraction.Exercises
 {
     // ════════════════════════════════════════════════════════════
     // الواجهات الأساسية

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OOP_CSharp_Fundamentals
+namespace Inheritance.Examples
 {
     public abstract class Animal
     {

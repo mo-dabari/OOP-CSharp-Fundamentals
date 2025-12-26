@@ -1,7 +1,5 @@
 // Exercises.cs
 
-using System;
-
 // 1️⃣ Exercise: Design a Product class with Encapsulation
 // Requirements:
 // - private field: _price (decimal)
@@ -12,8 +10,8 @@ using System;
 //     * Discount percent must be between 0 and 100
 //     * ApplyDiscount should update _price safely
 
-public class Product
-{
+// public class Product
+// {
     // TODO: implement private fields
     // TODO: implement constructor and methods
-}
+// }

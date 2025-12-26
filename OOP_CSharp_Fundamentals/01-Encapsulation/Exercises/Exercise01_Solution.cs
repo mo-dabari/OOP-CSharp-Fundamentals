@@ -1,3 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Encapsulation.Exercises
+{
+    
 public class Product
 {
     private decimal _price;
@@ -30,4 +37,5 @@ public class Product
 
         _price = _price - (_price * percent / 100m);
     }
+}
 }
