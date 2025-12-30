@@ -19,8 +19,6 @@
 ### 1. ما هي الواجهة؟
 
 <pre dir="ltr"><code class="language-csharp">
-    
-
 // واجهة - عقد فقط، بدون تطبيق
 public interface IAnimal
 {
