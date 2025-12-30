@@ -20,7 +20,7 @@
 
 <pre dir="ltr"><code class="language-csharp">
     
-```csharp
+
 // واجهة - عقد فقط، بدون تطبيق
 public interface IAnimal
 {
@@ -41,7 +41,6 @@ public class Dog : IAnimal
         return "كلب";  // تطبيق
     }
 }
-```
 </code></pre>
 
 ### 2. الوراثة المتعددة من Interfaces
