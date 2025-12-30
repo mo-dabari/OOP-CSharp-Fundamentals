@@ -17,7 +17,8 @@
 ## 📚 المفاهيم الأساسية
 
 ### 1. ما هي الواجهة؟
-
+<div dir="ltr">
+    
 ```csharp
 // واجهة - عقد فقط، بدون تطبيق
 public interface IAnimal
@@ -40,9 +41,11 @@ public class Dog : IAnimal
     }
 }
 ```
-
+</div>
 ### 2. الوراثة المتعددة من Interfaces
 
+<div dir="ltr">
+    
 ```csharp
 // واجهة واحدة
 public interface IMovable
@@ -56,7 +59,6 @@ public interface IFlying
     void TakeOff();
     void Land();
 }
-
 // فئة تطبق واجهتين! (وراثة متعددة)
 public class Bird : IMovable, IFlying
 {
@@ -65,6 +67,7 @@ public class Bird : IMovable, IFlying
     public void Land() { }
 }
 ```
+</div>
 
 ### 3. الفرق بين Interface و Abstract Class
 
@@ -79,7 +82,8 @@ public class Bird : IMovable, IFlying
 ---
 
 ## 🎯 أنواع الواجهات
-
+<div dir="ltr">
+    
 ### 1. Marker Interfaces (بدون members)
 ```csharp
 // واجهة للتحديد فقط
@@ -91,6 +95,7 @@ public class Document : IComparable
 {
 }
 ```
+</div>
 
 ### 2. Functional Interfaces (دالة واحدة)
 ```csharp
