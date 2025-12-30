@@ -18,7 +18,7 @@
 
 ### 1. ما هي الواجهة؟
 
-<div dir="ltr">   
+<pre dir="ltr"><code class="language-csharp">
     
 ```csharp
 // واجهة - عقد فقط، بدون تطبيق
@@ -42,11 +42,11 @@ public class Dog : IAnimal
     }
 }
 ```
-</div>
+</code></pre>
 
 ### 2. الوراثة المتعددة من Interfaces
 
-<div dir="ltr">
+<pre dir="ltr"><code class="language-csharp">
     
 ```csharp
 // واجهة واحدة
@@ -69,7 +69,7 @@ public class Bird : IMovable, IFlying
     public void Land() { }
 }
 ```
-</div>
+</code></pre>
 
 ### 3. الفرق بين Interface و Abstract Class
 
