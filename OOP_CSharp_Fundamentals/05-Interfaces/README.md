@@ -359,8 +359,8 @@ public class Human : IWorkable, IEatable
 
 ## 💻 حالات الاستخدام الشائعة
 
-<pre dir="ltr"><code class="language-csharp">
 ### 1. Data Access Pattern
+<pre dir="ltr"><code class="language-csharp">
 public interface IRepository<T>
 {
     T GetById(int id);
@@ -368,28 +368,35 @@ public interface IRepository<T>
     void Add(T item);
     void Delete(int id);
 }
-
+</code></pre>
 
 ### 2. Logging
+<pre dir="ltr"><code class="language-csharp">
 public interface ILogger
 {
     void Log(string message);
     void LogError(string error);
 }
+</code></pre>
 
 ### 3. Configuration
+<pre dir="ltr"><code class="language-csharp">
 public interface IConfiguration
 {
     string GetValue(string key);
 }
+</code></pre>
 
 ### 4. Service Pattern
+<pre dir="ltr"><code class="language-csharp">
 public interface IEmailService
 {
     void SendEmail(string to, string message);
 }
+</code></pre>
 
 ### 5. Factory Pattern
+<pre dir="ltr"><code class="language-csharp">
 public interface IPaymentProcessorFactory
 {
     IPaymentProcessor CreateProcessor(string type);
