@@ -8,7 +8,7 @@ Encapsulation هو مبدأ OOP يهدف إلى:
 - داخل كيان واحد
 - مع التحكم في كيفية الوصول إليهما
 
-**Encapsulation is about controlling access, not just hiding data.** 
+**Encapsulation is about controlling access, not just hiding data.**
 
 في C# يتحقق ذلك باستخدام:
 - Access Modifiers (private, protected, public)
@@ -43,7 +43,7 @@ Encapsulation هو مبدأ OOP يهدف إلى:
 لحماية الكائن من الاستخدام الخاطئ وحتى من نفسك كمطور
 ---
 
-3. Data Hiding 
+3. Data Hiding
 البيانات الداخلية لا يمكن الوصول إليها مباشرة
 
 ```
@@ -51,7 +51,7 @@ public class Person
 {
     // ❌ لا تفعل هذا - البيانات معرضة
     public int age;
-    
+
     // ✅ افعل هذا - البيانات مخفية
     private int age;
 }
@@ -65,13 +65,13 @@ public class Person
 public class Person
 {
     private int age;
-    
+
     // Property مع تحقق
     public int Age
     {
         get { return age; }
-        set 
-        { 
+        set
+        {
             if (value > 0 && value < 150)
                 age = value;
             else
@@ -102,7 +102,7 @@ public string Email
 ```
 | Concept       | Definition              | Concept                                    |
 |---------------|-------------------------|-------------------------------------------------|
-| Data Hiding   | إخفاء الحقول فقط       | private int age;                                | 
+| Data Hiding   | إخفاء الحقول فقط       | private int age;                                |
 | Encapsulation |إخفاء + توفير واجهة آمنة| private int age; + public int Age { get; set; } |
 ```
 Encapsulation = Data Hiding + Validation + Business Logic
@@ -124,10 +124,10 @@ Encapsulation الحقيقي:
 أدوات Encapsulation في C#:
 | Tool             | Purpose                        |
 |------------------|--------------------------------|
-| private fields   |حماية الحالة الداخلية         |                       
+| private fields   |حماية الحالة الداخلية         |
 | public methods   |       توفير سلوك آمن          |
 | properties       |تحكم ذكي في القراءة/الكتابة   |
-| readonly         |منع التعديل بعد الإنشاء        | 
+| readonly         |منع التعديل بعد الإنشاء        |
 ---
 
 7. Why Encapsulation Matters (Mental Model)
@@ -181,7 +181,7 @@ public bool VerifyPin(string enteredPin)
     return enteredPin == pin;  // فقط التحقق، لا الوصول المباشر
 }
 ```
---- 
+---
 4. المرونة في التطوير المستقبلي
 ```
 // اليوم: قيمة بسيطة
@@ -212,7 +212,7 @@ public string Name
 public class BankAccount
 {
     public decimal balance;  // 🚨 خطر!
-    
+
     // الآن أي شخص يمكنه تعديل الرصيد مباشرة
     // account.balance = -1000;  // ❌ لا حماية!
 }
@@ -222,7 +222,7 @@ public class BankAccount
 public class BankAccount
 {
     private decimal balance;  // ✅ مخفي
-    
+
     public decimal Balance
     {
         get { return balance; }
@@ -332,7 +332,7 @@ public class Student
 {
     private string name;
     private int age;
-    
+
     public string Name { get; set; }
     public int Age { get; set; }
 }
@@ -377,7 +377,7 @@ public string Name { get; set; }
  public class Person
 {
     public string ID { get; }  // لا يمكن تغييره بعد الإنشاء
-    
+
     public Person(string id)
     {
         ID = id;
@@ -399,7 +399,7 @@ var person = new Person("123");
     /// يجب أن يكون الاسم من 3 إلى 50 حرف
     /// </remarks>
     public string Username { get; set; }
-    
+
     /// <summary>
     /// التحقق من صحة كلمة المرور
     /// </summary>
