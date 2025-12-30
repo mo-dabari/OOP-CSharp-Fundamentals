@@ -42,6 +42,7 @@ public class Dog : IAnimal
 }
 ```
 </div>
+
 ### 2. الوراثة المتعددة من Interfaces
 
 <div dir="ltr">
