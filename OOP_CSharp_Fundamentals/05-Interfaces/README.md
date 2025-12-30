@@ -44,8 +44,6 @@ public class Dog : IAnimal
 ### 2. الوراثة المتعددة من Interfaces
 
 <pre dir="ltr"><code class="language-csharp">
-    
-```csharp
 // واجهة واحدة
 public interface IMovable
 {
@@ -65,7 +63,6 @@ public class Bird : IMovable, IFlying
     public void TakeOff() { }
     public void Land() { }
 }
-```
 </code></pre>
 
 ### 3. الفرق بين Interface و Abstract Class
@@ -81,7 +78,7 @@ public class Bird : IMovable, IFlying
 ---
 
 ## 🎯 أنواع الواجهات
-<div dir="ltr">
+<pre dir="ltr"><code class="language-csharp">
     
 ### 1. Marker Interfaces (بدون members)
 ```csharp
@@ -93,8 +90,6 @@ public interface IComparable
 public class Document : IComparable
 {
 }
-```
-</div>
 
 ### 2. Functional Interfaces (دالة واحدة)
 ```csharp
@@ -133,32 +128,35 @@ public class ReadOnlyFile : IReader
 {
     public string Read() => "قراءة فقط";
 }
-```
+</code></pre>
 
 ---
 
 ## 💡 فوائد الواجهات
 
 ### 1. العقود والالتزامات
-```csharp
+
+<pre dir="ltr"><code class="language-csharp">
 // العقد: أي class يرث هذا يجب أن يطبق هذا
 public interface IPaymentProcessor
 {
     bool ProcessPayment(decimal amount);
     bool RefundPayment(string transactionId);
 }
-```
+</code></pre>
 
 ### 2. الوراثة المتعددة (الميزة الكبرى!)
-```csharp
+
+<pre dir="ltr"><code class="language-csharp">
 // كلب هو حيوان وحيوان أليف
 public class Dog : IAnimal, IPet, ITrainable
 {
 }
-```
+</code></pre>
 
 ### 3. فصل الواجهات عن التطبيق
-```csharp
+
+<pre dir="ltr"><code class="language-csharp">
 // المستخدم يرى الواجهة فقط
 public void ProcessOrder(IPaymentProcessor processor)
 {
@@ -169,24 +167,24 @@ public void ProcessOrder(IPaymentProcessor processor)
 ProcessOrder(new CreditCardProcessor());
 ProcessOrder(new PayPalProcessor());
 ProcessOrder(new ApplePayProcessor());
-```
+</code></pre>
 
 ### 4. سهولة الاختبار
-```csharp
+<pre dir="ltr"><code class="language-csharp">
 // Mock للاختبار
 public class FakePaymentProcessor : IPaymentProcessor
 {
     public bool ProcessPayment(decimal amount) => true;
     public bool RefundPayment(string id) => true;
 }
-```
+</code></pre>
 
 ---
 
 ## ⚠️ أخطاء شائعة
 
 ### ❌ الخطأ 1: واجهة بدون معنى
-```csharp
+<pre dir="ltr"><code class="language-csharp">
 // ❌ خطأ - لا تجميع منطقي
 public interface IStuff
 {
@@ -199,10 +197,10 @@ public interface IRepository<T>
 {
     T GetById(int id);
 }
-```
+</code></pre>
 
 ### ❌ الخطأ 2: واجهة كبيرة جداً
-```csharp
+<pre dir="ltr"><code class="language-csharp">
 // ❌ خطأ - فئة قد لا تحتاج كل شيء
 public interface IBigInterface
 {
@@ -213,20 +211,21 @@ public interface IBigInterface
     void Process();
     void Generate();
 }
-
+</code></pre>
 // ✅ صحيح - واجهات صغيرة محددة
+<pre dir="ltr"><code class="language-csharp">
 public interface IReader { void Read(); }
 public interface IWriter { void Write(); }
-```
+</code></pre>
 
 ### ❌ الخطأ 3: نسيان تطبيق جميع الـ members
-```csharp
+<pre dir="ltr"><code class="language-csharp">
 // ❌ خطأ - ملف لم ينفذ جميع الـ members
 public class MyClass : ILogger
 {
     // لم ننفذ Log() - خطأ تجميع!
 }
-```
+</code></pre>
 
 ---
 
@@ -234,76 +233,77 @@ public class MyClass : ILogger
 
 ### ✅ استخدم عندما:
 1. **عقود يجب التزام بها**
-   ```csharp
+<pre dir="ltr"><code class="language-csharp">
    public interface IDisposable
    {
        void Dispose();  // كل resource يجب أن يحرر نفسه
    }
-   ```
+</code></pre>
 
 2. **وراثة متعددة**
-   ```csharp
+<pre dir="ltr"><code class="language-csharp">
    public interface IAnimal { }
    public interface IFlying { }
    public class Bird : IAnimal, IFlying { }
-   ```
+
 
 3. **Dependency Injection**
-   ```csharp
    public class Service
    {
        private ILogger logger;
        public Service(ILogger log) => logger = log;
    }
-   ```
 
 4. **Polymorphism**
-   ```csharp
    List<IPaymentProcessor> processors = new()
    {
        new CreditCard(),
        new PayPal(),
        new Apple()
    };
-   ```
-
+</code></pre>
 ---
 
 ## 📝 أفضل الممارسات
 
 ### ✅ افعل هذا:
 
-```csharp
+<pre dir="ltr"><code class="language-csharp">
 // 1. سمّي الواجهة بـ I
 public interface IRepository { }
-
+</code></pre>
 // 2. اجعلها محددة
+<pre dir="ltr"><code class="language-csharp">
 public interface IUserRepository
 {
     User GetById(int id);
 }
-
+</code></pre>
 // 3. فصل المخاوف
+<pre dir="ltr"><code class="language-csharp">
 public interface IReader { }
 public interface IWriter { }
 public interface IClosable { }
-
+</code></pre>
+    
 // 4. استخدم generics
+<pre dir="ltr"><code class="language-csharp">
 public interface IRepository<T>
 {
     T GetById(int id);
 }
-
+</code></pre>
 // 5. طبق الواجهة بالكامل
+<pre dir="ltr"><code class="language-csharp">
 public class UserRepository : IUserRepository
 {
     public User GetById(int id) { /* تطبيق */ }
 }
-```
+</code></pre>
 
 ### ❌ لا تفعل هذا:
 
-```csharp
+<pre dir="ltr"><code class="language-csharp">
 // ❌ بدون I prefix
 public interface Animal { }
 
@@ -323,7 +323,7 @@ public class Wrong : IInterface
 {
     // لم نطبق الـ members!
 }
-```
+</code></pre>
 
 ---
 
@@ -331,7 +331,7 @@ public class Wrong : IInterface
 
 > **قاعدة SOLID:** "الفئة لا يجب أن تُجبر على تطبيق واجهات لا تحتاجها"
 
-```csharp
+<pre dir="ltr"><code class="language-csharp">
 // ❌ خطأ - واجهة كبيرة
 public interface IWorker
 {
@@ -360,14 +360,14 @@ public class Human : IWorkable, IEatable
     public void Work() { }
     public void Eat() { }
 }
-```
+</code></pre>
 
 ---
 
 ## 💻 حالات الاستخدام الشائعة
 
+<pre dir="ltr"><code class="language-csharp">
 ### 1. Data Access Pattern
-```csharp
 public interface IRepository<T>
 {
     T GetById(int id);
@@ -375,46 +375,38 @@ public interface IRepository<T>
     void Add(T item);
     void Delete(int id);
 }
-```
+
 
 ### 2. Logging
-```csharp
 public interface ILogger
 {
     void Log(string message);
     void LogError(string error);
 }
-```
 
 ### 3. Configuration
-```csharp
 public interface IConfiguration
 {
     string GetValue(string key);
 }
-```
 
 ### 4. Service Pattern
-```csharp
 public interface IEmailService
 {
     void SendEmail(string to, string message);
 }
-```
 
 ### 5. Factory Pattern
-```csharp
 public interface IPaymentProcessorFactory
 {
     IPaymentProcessor CreateProcessor(string type);
 }
-```
-
+</code></pre>
 ---
 
 ## 📊 مقارنة سريعة
 
-```
+<pre dir="ltr"><code class="language-csharp">
                     Interface    Abstract    Class
 ────────────────────────────────────────────────
 الوراثة المتعددة      ✅           ❌         ❌
@@ -423,7 +415,7 @@ Constructor         ❌           ✅         ✅
 Access Modifiers    عام          جميع       جميع
 الاستخدام          عقود         نموذج      كائن
 ────────────────────────────────────────────────
-```
+</code></pre>
 
 ---
 
@@ -442,18 +434,3 @@ Access Modifiers    عام          جميع       جميع
 
 4. **أسئلة المقابلات:**
    - InterviewQuestions.md - 10 أسئلة مع إجابات
-
----
-
-## 📚 المراجع
-
-- Microsoft Docs: Interfaces
-- SOLID Principles
-- Design Patterns with Interfaces
-- C# Language Features
-
----
-
-**التاريخ:** ديسمبر 2024
-**الإصدار:** 1.0
-**الحالة:** جاهز للدراسة ✅
