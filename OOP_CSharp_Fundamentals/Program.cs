@@ -1,4 +1,5 @@
 ﻿
+using Encapsulation.RealWorldScenarios;
 using Inheritance.RealWorldScenarios;
 using Interfaces.Examples;
 using Interfaces.Exercises;
@@ -12,6 +13,213 @@ namespace OOP_CSharp_Fundamentals
     {
         static void Main(string[] args)
         {
+            #region (Encapsulation)
+            #region Exercises
+            /**
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+            Console.WriteLine("╔═══════════════════════════════════════════════════════════╗");
+            Console.WriteLine("║           تمارين عملية على الكبسولة (Encapsulation)    ║");
+            Console.WriteLine("╚═══════════════════════════════════════════════════════════╝\n");
+
+            // ─────────────────────────────────────────
+            // التمرين 1: نظام الحسابات البنكية
+            // ─────────────────────────────────────────
+            Console.WriteLine("\n" + new string('═', 60));
+            Console.WriteLine("  التمرين 1: نظام إدارة الحسابات البنكية");
+            Console.WriteLine(new string('═', 60) + "\n");
+
+            try
+            {
+                var customer = new Encapsulation.Exercises.Customer(1, "أحمد محمود", "ahmed@example.com");
+                Console.WriteLine($"✅ {customer}");
+
+                var account = new Encapsulation.Exercises.BankAccount("1001-5000-2024", 5000);
+                Console.WriteLine($"✅ حساب جديد: {account.AccountNumber}\n");
+
+                account.PrintBalance();
+                account.Deposit(2000);
+                account.Withdraw(1000);
+                account.PrintBalance();
+                account.PrintTransactions();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ خطأ: {ex.Message}");
+            }
+
+            // ─────────────────────────────────────────
+            // التمرين 2: نظام الموارد البشرية
+            // ─────────────────────────────────────────
+            Console.WriteLine("\n\n" + new string('═', 60));
+            Console.WriteLine("  التمرين 2: نظام إدارة الموارد البشرية");
+            Console.WriteLine(new string('═', 60) + "\n");
+
+            try
+            {
+                var dept = new Encapsulation.Exercises.Department("تطوير الويب");
+
+                var emp1 = new Encapsulation.Exercises.Employee("فاطمة علي", 5000, "123-45-6789");
+                var emp2 = new Encapsulation.Exercises.Employee("محمد حسن", 5500, "987-65-4321");
+                var emp3 = new Encapsulation.Exercises.Employee("سارة أحمد", 4800, "555-55-5555");
+
+                dept.AddEmployee(emp1);
+                dept.AddEmployee(emp2);
+                dept.AddEmployee(emp3);
+
+                dept.DisplayAllEmployees();
+                dept.PrintPayrollReport();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ خطأ: {ex.Message}");
+            }
+
+            // ─────────────────────────────────────────
+            // التمرين 3: نظام الأمان وكلمات المرور
+            // ─────────────────────────────────────────
+            Console.WriteLine("\n\n" + new string('═', 60));
+            Console.WriteLine("  التمرين 3: نظام الأمان وكلمات المرور");
+            Console.WriteLine(new string('═', 60) + "\n");
+
+            try
+            {
+                var user = new Encapsulation.Exercises.User("ali_hassan", "Strong@Pass123");
+                Console.WriteLine($"✅ تم إنشاء مستخدم: {user.Username}\n");
+
+                Console.WriteLine("🔐 محاولات الدخول:");
+                user.VerifyPassword("Wrong123!");
+                user.VerifyPassword("WrongPass@1");
+                user.VerifyPassword("Wrong@Pass2");
+                user.VerifyPassword("Strong@Pass123");
+
+                user.PrintLoginHistory();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ خطأ: {ex.Message}");
+            }
+
+            Console.WriteLine("\n" + new string('═', 60));
+            Console.WriteLine("  ✅ انتهت جميع التمارين");
+            Console.WriteLine(new string('═', 60) + "\n");
+            **/
+            #endregion
+
+            #region Real World Scenarios
+            /**
+                Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+                Console.WriteLine("╔═══════════════════════════════════════════════════════════╗");
+                Console.WriteLine("║       نظام مكتبة رقمية متكامل - حالة واقعية            ║");
+                Console.WriteLine("╚═══════════════════════════════════════════════════════════╝\n");
+
+                // ─────────────────────────────────────────
+                // إنشاء النظام
+                // ─────────────────────────────────────────
+                var library = new LibraryManagementSystem();
+
+                // إضافة الكتب
+                Console.WriteLine("📚 إضافة الكتب:");
+                Console.WriteLine("════════════════════════════════\n");
+
+                library.AddBook(new Book("978-9760429649", "نزيف الحجر", "جمال الغيطاني", 1983, 5, 45));
+                library.AddBook(new Book("978-9776139159", "أولاد حارتنا", "نجيب محفوظ", 1959, 8, 50));
+                library.AddBook(new Book("978-9777621474", "الخيميائي", "باولو كويلو", 1988, 10, 40));
+                library.AddBook(new Book("978-9770913169", "1984", "جورج أورويل", 1949, 7, 60));
+
+                // إضافة الأعضاء
+                Console.WriteLine("\n\n👥 تسجيل الأعضاء:");
+                Console.WriteLine("════════════════════════════════\n");
+
+                var member1 = new Member(1, "أحمد محمود", "ahmed@example.com");
+                var member2 = new Member(2, "فاطمة علي", "fatima@example.com");
+                var member3 = new Member(3, "محمد حسن", "mohammed@example.com");
+
+                library.AddMember(member1);
+                library.AddMember(member2);
+                library.AddMember(member3);
+
+                // ─────────────────────────────────────────
+                // عمليات الاستعارة
+                // ─────────────────────────────────────────
+                Console.WriteLine("\n\n📖 عمليات الاستعارة:");
+                Console.WriteLine("════════════════════════════════\n");
+
+                library.BorrowBook(1, "978-9760429649");
+                library.BorrowBook(1, "978-9777621474");
+                library.BorrowBook(2, "978-9776139159");
+                library.BorrowBook(3, "978-9770913169");
+
+                // ─────────────────────────────────────────
+                // العرض والتقارير
+                // ─────────────────────────────────────────
+                library.PrintLibraryStatistics();
+                library.PrintAllBooks();
+
+                // ─────────────────────────────────────────
+                // الإرجاع
+                // ─────────────────────────────────────────
+                Console.WriteLine("\n\n📤 إرجاع الكتب:");
+                Console.WriteLine("════════════════════════════════\n");
+
+                library.ReturnBook(1, "978-9760429649");
+                library.ReturnBook(2, "978-9776139159");
+
+                // ─────────────────────────────────────────
+                // سجلات الأعضاء
+                // ─────────────────────────────────────────
+                library.PrintMemberBorrowHistory(1);
+                library.PrintAllMembers();
+
+                // ─────────────────────────────────────────
+                // الملخص
+                // ─────────────────────────────────────────
+                Console.WriteLine("\n\n═══════════════════════════════════════════════════════════");
+                Console.WriteLine("  ✨ مميزات Encapsulation في المكتبة:");
+                Console.WriteLine("═══════════════════════════════════════════════════════════\n");
+
+                Console.WriteLine("""
+                1️⃣  حماية البيانات الحساسة:
+                    • ISBN و Title و Author محمية
+                    • Balance والبيانات الشخصية محمية
+                    • لا يمكن تعديل مباشرة من الخارج
+
+                2️⃣  Validation قوي:
+                    • التحقق من ISBN عند الإنشاء
+                    • التحقق من الأسعار والأرقام
+                    • التحقق من البريد الإلكتروني
+
+                3️⃣  العمليات المنطقية:
+                    • BorrowCopy() تقلل النسخ تلقائياً
+                    • ReturnCopy() تزيد النسخ تلقائياً
+                    • العمليات آمنة وموثوقة
+
+                4️⃣  حسابات الغرامات:
+                    • احتساب تلقائي للتأخير
+                    • إضافة للرصيد تلقائياً
+                    • بيانات دقيقة وآمنة
+
+                5️⃣  التقارير الشاملة:
+                    • إحصائيات المكتبة
+                    • سجلات الأعضاء
+                    • الكتب المتأخرة
+                    • كل البيانات محمية
+
+                6️⃣  الانعزال الكامل:
+                    • التطبيق لا يعرف التفاصيل الداخلية
+                    • تغيير الداخل لا يؤثر على الخارج
+                    • نظام مرن وآمن
+
+                هذا هو الـ Encapsulation الحقيقي!
+                """);
+
+                Console.WriteLine("═══════════════════════════════════════════════════════════");
+                Console.WriteLine("  ✅ انتهت الحالة الواقعية");
+                Console.WriteLine("═══════════════════════════════════════════════════════════\n");
+            **/
+            #endregion
+            #endregion
 
             #region (Inheritance)
             #region Real World Scenarios => StudentManagementSystem
