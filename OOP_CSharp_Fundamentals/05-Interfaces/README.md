@@ -81,7 +81,6 @@ public class Bird : IMovable, IFlying
 <pre dir="ltr"><code class="language-csharp">
     
 ### 1. Marker Interfaces (بدون members)
-```csharp
 // واجهة للتحديد فقط
 public interface IComparable
 {
@@ -92,15 +91,12 @@ public class Document : IComparable
 }
 
 ### 2. Functional Interfaces (دالة واحدة)
-```csharp
 public interface ILogger
 {
     void Log(string message);
 }
-```
 
 ### 3. Rich Interfaces (عدة members)
-```csharp
 public interface IRepository<T>
 {
     T GetById(int id);
@@ -109,10 +105,8 @@ public interface IRepository<T>
     void Delete(int id);
     void Update(T item);
 }
-```
 
 ### 4. Segregated Interfaces (نخصصات)
-```csharp
 public interface IReader
 {
     string Read();
@@ -129,7 +123,6 @@ public class ReadOnlyFile : IReader
     public string Read() => "قراءة فقط";
 }
 </code></pre>
-
 ---
 
 ## 💡 فوائد الواجهات
