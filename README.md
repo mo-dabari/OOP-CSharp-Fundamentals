@@ -193,8 +193,8 @@ OOP-CSharp-Fundamentals/
 │   │   ├── BasicEncapsulation.cs      ✅
 │   │   ├── PropertyEncapsulation.cs   ✅
 │   │   └── DataHiding.cs              ✅
-│   ├── 📂 Exercises/                  ⏳ قريباً
-│   ├── 📂 RealWorldScenarios/         ⏳ قريباً
+│   ├── 📂 Exercises/                  ✅
+│   ├── 📂 RealWorldScenarios/         ✅ 
 │   └── 📄 InterviewQuestions.md       ⏳ قريباً
 │
 ├── 📂 02-Abstraction/                 # التجريد ✅
@@ -207,7 +207,7 @@ OOP-CSharp-Fundamentals/
 │   │   └── Exercises.cs               ✅
 │   ├── 📂 RealWorldScenarios/
 │   │   └── DigitalLibrarySystem.cs    ✅
-│   └── 📄 InterviewQuestions.md       ✅
+│   └── 📄 InterviewQuestions.md       ⏳ قريباً  
 │
 ├── 📂 03-Inheritance/                 # الوراثة ✅
 │   ├── 📄 README.md                   ✅
@@ -219,11 +219,10 @@ OOP-CSharp-Fundamentals/
 │   │   └── Exercises.cs               ✅
 │   ├── 📂 RealWorldScenarios/
 │   │   └── StudentManagementSystem.cs ✅
-│   └── 📄 InterviewQuestions.md       ✅
+│   └── 📄 InterviewQuestions.md       ⏳ قريباً
 │
-├── 📂 04-Polymorphism/                ⏳ قريباً
-├── 📂 05-Interfaces/                  ⏳ قريباً
-├── 📂 06-AbstractClasses/             ⏳ قريباً
+├── 📂 04-Polymorphism/                ✅
+├── 📂 05-Interfaces/                  ✅ قريباً
 ├── 📂 07-SOLID-Principles/            ⏳ قريباً
 ├── 📂 08-DesignPatterns/              ⏳ قريباً
 ├── 📂 09-AdvancedOOP/                 ⏳ قريباً
@@ -604,4 +603,5 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file for
 ⭐ Star this repo if you find it helpful!
 
 </div>
+
 
