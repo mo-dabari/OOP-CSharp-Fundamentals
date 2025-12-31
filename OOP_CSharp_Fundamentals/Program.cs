@@ -1,4 +1,7 @@
 ﻿
+using Aggregation_Association.Examples;
+using Aggregation_Association.RealWorldScenarios;
+using Composition.Exercises;
 using Encapsulation.RealWorldScenarios;
 using Inheritance.RealWorldScenarios;
 using Interfaces.Examples;
@@ -941,6 +944,197 @@ namespace OOP_CSharp_Fundamentals
             **/
             #endregion
 
+            #endregion
+
+            #region Composition
+            /**
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+            Console.WriteLine("╔═══════════════════════════════════════════════════════════╗");
+            Console.WriteLine("║        تمارين وحالات واقعية: Composition               ║");
+            Console.WriteLine("╚═══════════════════════════════════════════════════════════╝\n");
+
+            // ─────────────────────────────────────────
+            // التمرين 1
+            // ─────────────────────────────────────────
+            Console.WriteLine("1️⃣  التمرين 1: نظام الجامعة");
+            Console.WriteLine("════════════════════════════════\n");
+
+            var addr1 = new Address("شارع النيل", "القاهرة");
+            var student = new UniversityStudent(1, "أحمد محمود", addr1);
+            student.DisplayInfo();
+
+            // ─────────────────────────────────────────
+            // التمرين 2
+            // ─────────────────────────────────────────
+            Console.WriteLine("\n\n2️⃣  التمرين 2: نظام الحاسبات");
+            Console.WriteLine("════════════════════════════════\n");
+
+            var computer = new Computer("Intel i7", 16);
+            computer.Boot();
+
+            // ─────────────────────────────────────────
+            // التمرين 3
+            // ─────────────────────────────────────────
+            Console.WriteLine("\n\n3️⃣  التمرين 3: نظام الكتب");
+            Console.WriteLine("════════════════════════════════\n");
+
+            var author1 = new Author("نجيب محفوظ");
+            var author2 = new Author("أحمد خالد توفيق");
+
+            var lib = new Library();
+            lib.AddBook(new Composition.Exercises.Book("أولاد حارتنا", author1));
+            lib.AddBook(new Composition.Exercises.Book("ساحر الأسكندرية", author2));
+            lib.DisplayBooks();
+
+            // ─────────────────────────────────────────
+            // الحالة الواقعية: المقهى
+            // ─────────────────────────────────────────
+            Console.WriteLine("\n\n🏪 الحالة الواقعية: نظام مقهى متكامل");
+            Console.WriteLine("════════════════════════════════\n");
+
+            var cafe = new Cafe("مقهى الحي");
+
+            cafe.AddIngredientsToFridge("الحليب");
+            cafe.AddIngredientsToFridge("البيض");
+            cafe.MakeCoffee();
+            cafe.PrepareFood();
+
+            Console.WriteLine("\n" + new string('═', 60));
+            Console.WriteLine("  ✨ مميزات Composition:");
+            Console.WriteLine(new string('═', 60) + "\n");
+
+            Console.WriteLine("""
+            1️⃣  HAS-A علاقة (احتواء):
+                السيارة لديها محرك
+                المقهى لديها آلات
+                الحاسب لديه معالج
+
+            2️⃣  مرونة عالية:
+                يمكن تغيير الأجزاء
+                توزيع المسؤوليات
+                إعادة استخدام سهلة
+
+            3️⃣  Strong vs Weak:
+                Strong: الأجزاء تنتهي مع الكل
+                Weak: الأجزاء مستقلة
+
+            4️⃣  أفضل من Inheritance:
+                معظم الحالات composition
+                مرونة أكثر
+                تعقيد أقل
+            """);
+
+            Console.WriteLine(new string('═', 60));
+            Console.WriteLine("  ✅ انتهت التمارين");
+            Console.WriteLine(new string('═', 60) + "\n");
+            **/
+            #endregion
+
+            #region AGGREGATION && Association
+            /**
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+            Console.WriteLine("╔═══════════════════════════════════════════════════════════╗");
+            Console.WriteLine("║     Aggregation و Association - أمثلة وتمارين          ║");
+            Console.WriteLine("╚═══════════════════════════════════════════════════════════╝\n");
+
+            // ─────────────────────────────────────────
+            // 1. AGGREGATION - Department & Employee
+            // ─────────────────────────────────────────
+            Console.WriteLine("1️⃣  AGGREGATION - الأقسام والموظفون");
+            Console.WriteLine("════════════════════════════════\n");
+
+            var emp1 = new Aggregation_Association.Examples.Employee(1, "فاطمة علي");
+            var emp2 = new Aggregation_Association.Examples.Employee(2, "محمد حسن");
+
+            var deptIT = new Department("تكنولوجيا المعلومات");
+            deptIT.HireEmployee(emp1);
+            deptIT.HireEmployee(emp2);
+            deptIT.DisplayEmployees();
+
+            // الموظف يمكن أن ينتقل لقسم آخر
+            var deptHR = new Department("الموارد البشرية");
+            deptIT.RemoveEmployee(emp1);
+            deptHR.HireEmployee(emp1);
+
+            Console.WriteLine();
+            deptIT.DisplayEmployees();
+            deptHR.DisplayEmployees();
+
+            // ─────────────────────────────────────────
+            // 2. ASSOCIATION - Student & Course
+            // ─────────────────────────────────────────
+            Console.WriteLine("\n\n2️⃣  ASSOCIATION - الطلاب والمقررات");
+            Console.WriteLine("════════════════════════════════\n");
+
+            var c1 = new Aggregation_Association.Examples.Course("CS101", "مقدمة برمجة");
+            var c2 = new Aggregation_Association.Examples.Course("CS102", "هياكل البيانات");
+
+            var student1 = new Aggregation_Association.Examples.Student(1, "أحمد محمود");
+            student1.EnrollInCourse(c1);
+            student1.EnrollInCourse(c2);
+            student1.DisplayCourses();
+
+            // المقرر يبقى موجود حتى لو ترك الطالب
+            student1.DropCourse(c1);
+            student1.DisplayCourses();
+
+            // طالب آخر يمكن أن يسجل في نفس المقرر
+            var student2 = new Aggregation_Association.Examples.Student(2, "سارة أحمد");
+            student2.EnrollInCourse(c1);
+            student2.DisplayCourses();
+
+            // ─────────────────────────────────────────
+            // 3. ASSOCIATION Two-Way
+            // ─────────────────────────────────────────
+            Console.WriteLine("\n\n3️⃣  ASSOCIATION Two-Way - المعلمون والطلاب");
+            Console.WriteLine("════════════════════════════════\n");
+
+            var teacher = new Teacher("د. علي أحمد");
+            teacher.Teach(student1);
+            teacher.Teach(student2);
+            teacher.DisplayStudents();
+
+            // ─────────────────────────────────────────
+            // 4. نظام جامعة متكامل
+            // ─────────────────────────────────────────
+            Console.WriteLine("\n\n4️⃣  نظام جامعة متكامل");
+            Console.WriteLine("════════════════════════════════");
+
+            var univ = new University("جامعة القاهرة");
+            univ.AddDepartment(deptIT);
+            univ.AddDepartment(deptHR);
+            univ.DisplayStructure();
+
+            // ─────────────────────────────────────────
+            // الملخص
+            // ─────────────────────────────────────────
+            Console.WriteLine("\n\n═══════════════════════════════════════════════════════════");
+            Console.WriteLine("  ✨ الفروقات:");
+            Console.WriteLine("═══════════════════════════════════════════════════════════\n");
+
+            Console.WriteLine("""
+            🔗 COMPOSITION (قوي):
+               • Car HAS-A Engine
+               • Engine ينتهي مع Car
+               • علاقة محكومة جداً
+
+            🔗 AGGREGATION (متوسط):
+               • Department HAS-A Employee
+               • Employee يمكن أن يكون مستقل
+               • علاقة مرنة نسبياً
+
+            🔗 ASSOCIATION (ضعيف):
+               • Student KNOWS-A Course
+               • معرفة بسيطة فقط
+               • علاقة مؤقتة
+            """);
+
+            Console.WriteLine("════════════════════════════════════════════════════════════");
+            Console.WriteLine("  ✅ انتهت الأمثلة");
+            Console.WriteLine("════════════════════════════════════════════════════════════\n");
+            **/
             #endregion
 
             #region (Polymorphism)
