@@ -9,6 +9,11 @@ using Interfaces.Exercises;
 using Polymorphism.Examples.Advanced;
 using Polymorphism.Exercises;
 using Polymorphism.RealWorldScenarios.OOP_CSharp_Fundamentals;
+using PublicExamples.ZooSystem.AbstractClasses;
+using PublicExamples.ZooSystem.ConcreteClasses.Animals;
+using PublicExamples.ZooSystem.ConcreteClasses.Enclosures;
+using PublicExamples.ZooSystem;
+using PublicExample.ZooSystem.ValueObjects;
 
 namespace OOP_CSharp_Fundamentals
 {
@@ -1687,6 +1692,295 @@ namespace OOP_CSharp_Fundamentals
         **/
             #endregion
             #endregion
+
+            #region Public Examples => Zoo Management System
+            /**
+            Console.WriteLine("=== 🦁 Zoo Management System ===\n");
+
+            // Example 1: إنشاء حديقة الحيوانات
+            CreateZooExample();
+
+            Console.WriteLine("\n" + new string('=', 50) + "\n");
+
+            // Example 2: إضافة حيوانات وأقفاص
+            AddAnimalsAndEnclosuresExample();
+
+            Console.WriteLine("\n" + new string('=', 50) + "\n");
+
+            // Example 3: استخدام Interfaces (القدرات)
+            InterfacesExample();
+
+            Console.WriteLine("\n" + new string('=', 50) + "\n");
+
+            // Example 4: Polymorphism
+            PolymorphismExample();
+
+            Console.WriteLine("\n" + new string('=', 50) + "\n");
+
+            // Example 5: التعامل مع الأخطاء
+            ErrorHandlingExample();
+
+            Console.WriteLine("\n=== Program Finished ===");
+            Console.ReadKey();
         }
+
+        #region Example 1: إنشاء حديقة الحيوانات
+        static void CreateZooExample()
+        {
+            Console.WriteLine("📍 Example 1: إنشاء حديقة الحيوانات");
+            Console.WriteLine(new string('-', 50));
+
+            // إنشاء عنوان الحديقة
+            var address = new PublicExample.ZooSystem.ValueObjects.Address("Egypt", "Cairo", "Giza", "Pyramids Road", 100);
+
+            // إنشاء الحديقة
+            var zoo = new PublicExamples.ZooSystem.Zoo(
+                "Giza Zoo",
+                50000.0, // 50,000 متر مربع
+                address
+            );
+
+            Console.WriteLine($"✅ Zoo Created: {zoo.Name}");
+            Console.WriteLine($"📏 Garden Area: {zoo.GardenArea} m²");
+            Console.WriteLine($"📮 Location: {address.City}, {address.Country}");
+            Console.WriteLine($"🏠 Address: {address.StreetName}, Building #{address.BuildingNumber}");
+        }
+        #endregion
+
+        #region Example 2: إضافة حيوانات وأقفاص
+        static void AddAnimalsAndEnclosuresExample()
+        {
+            Console.WriteLine("🦁 Example 2: إضافة حيوانات وأقفاص للحديقة");
+            Console.WriteLine(new string('-', 50));
+
+            var address = new PublicExample.ZooSystem.ValueObjects.Address("Egypt", "Cairo", "Giza", "Zoo Street", 1);
+            var zoo = new PublicExamples.ZooSystem.Zoo("Cairo Zoo", 60000.0, address);
+
+            // إنشاء حيوانات مختلفة
+            var lion = new Lion("Simba", 5, hasDanger: true);
+            var elephant = new Elephant("Dumbo", 10, hasDanger: false);
+            var eagle = new Eagle("Eddie", 3);
+            var penguin = new Penguin("Pingu", 2, hasDanger: false, hasFeathers: true);
+
+            Console.WriteLine("\n🐾 Animals Created:");
+            Console.WriteLine($"  - Lion: {lion.Name}, Age: {lion.Age}, Dangerous: {lion.HasDanger}");
+            Console.WriteLine($"  - Elephant: {elephant.Name}, Age: {elephant.Age}, Has Fur: {elephant.HasFur}");
+            Console.WriteLine($"  - Eagle: {eagle.Name}, Age: {eagle.Age}, Has Feathers: {eagle.HasFeathers}");
+            Console.WriteLine($"  - Penguin: {penguin.Name}, Age: {penguin.Age}");
+
+            // إنشاء أقفاص وحاويات
+            var lionCage = new Cage("Lion Enclosure", 100.0, 50.0, false, true);
+            var elephantCage = new Cage("Elephant Habitat", 150.0, 100.0, true, false);
+            var birdCage = new Cage("Bird Aviary", 80.0, 60.0, false, true);
+            var penguinPool = new Pool("Penguin Pool", 70.0, 50.0, true, false, 5.0);
+
+            Console.WriteLine("\n🏠 Enclosures Created:");
+            Console.WriteLine($"  - {lionCage.Name}: {lionCage.Size} m² (Closed, Has Roof)");
+            Console.WriteLine($"  - {elephantCage.Name}: {elephantCage.Size} m² (Open Area)");
+            Console.WriteLine($"  - {birdCage.Name}: {birdCage.Size} m²");
+            Console.WriteLine($"  - {penguinPool.Name}: {penguinPool.Size} m² (Water Depth: {penguinPool.WaterDepth}m)");
+
+            // إضافة الحيوانات للأقفاص
+            lionCage.AddAnimal(lion);
+            elephantCage.AddAnimal(elephant);
+            birdCage.AddAnimal(eagle);
+            penguinPool.AddAnimal(penguin);
+
+            Console.WriteLine("\n✅ Animals Added to Enclosures:");
+            Console.WriteLine($"  - {lion.Name} → {lionCage.Name}");
+            Console.WriteLine($"  - {elephant.Name} → {elephantCage.Name}");
+            Console.WriteLine($"  - {eagle.Name} → {birdCage.Name}");
+            Console.WriteLine($"  - {penguin.Name} → {penguinPool.Name}");
+
+            // إضافة الأقفاص للحديقة
+            zoo.AddEnclosure(lionCage);
+            zoo.AddEnclosure(elephantCage);
+            zoo.AddEnclosure(birdCage);
+            zoo.AddEnclosure(penguinPool);
+
+            Console.WriteLine($"\n🏛️ Total Enclosures in {zoo.Name}: {zoo.Enclosures.Count}");
+
+            // تنظيف الحاويات
+            Console.WriteLine("\n🧹 Cleaning Enclosures:");
+            lionCage.Clean();
+            penguinPool.Clean();
+        }
+        #endregion
+
+        #region Example 3: استخدام Interfaces (القدرات)
+        static void InterfacesExample()
+        {
+            Console.WriteLine("🎯 Example 3: استخدام Interfaces - قدرات الحيوانات");
+            Console.WriteLine(new string('-', 50));
+
+            var lion = new Lion("Alex", 4, true);
+            var elephant = new Elephant("Tantor", 8, false);
+            var eagle = new Eagle("Marahute", 2);
+            var penguin = new Penguin("Skipper", 3, false, true);
+
+            Console.WriteLine("\n🦁 Lion Capabilities:");
+            lion.MakeSound();
+            lion.Eat();
+            lion.walk(); // IWalkable
+
+            Console.WriteLine("\n🐘 Elephant Capabilities:");
+            elephant.MakeSound();
+            elephant.Eat();
+            elephant.walk(); // IWalkable
+            elephant.Swim(); // ISwimmable
+            Console.WriteLine($"  Swimming Speed: {elephant.GetSwimmingSpeed()} km/h");
+
+            Console.WriteLine("\n🦅 Eagle Capabilities:");
+            eagle.MakeSound();
+            eagle.Eat();
+            eagle.Fly(); // IFlyable
+
+            Console.WriteLine("\n🐧 Penguin Capabilities:");
+            penguin.MakeSound();
+            penguin.Eat();
+            penguin.Swim(); // ISwimmable
+            Console.WriteLine($"  Swimming Speed: {penguin.GetSwimmingSpeed()} km/h");
+        }
+        #endregion
+
+        #region Example 4: Polymorphism
+        static void PolymorphismExample()
+        {
+            Console.WriteLine("🔄 Example 4: Polymorphism - تعدد الأشكال");
+            Console.WriteLine(new string('-', 50));
+
+            // جميع الحيوانات تُعامل كـ Animal (Parent class)
+            Animal[] animals = new Animal[]
+            {
+                new Lion("Mufasa", 6, true),
+                new Elephant("Ellie", 12, false),
+                new Eagle("Hawkeye", 4),
+                new Penguin("Mumble", 2, false, true)
+            };
+
+            Console.WriteLine("\n🐾 Processing all animals as Animal type:\n");
+
+            foreach (var animal in animals)
+            {
+                // Polymorphism: نفس الـ method لكن سلوك مختلف لكل حيوان
+                Console.WriteLine($"--- {animal.Name} ({animal.GetType().Name}) ---");
+                Console.WriteLine(animal.DisplayInfo());
+                animal.MakeSound();
+                animal.Eat();
+                Console.WriteLine();
+            }
+
+            // استخدام Pattern Matching مع Polymorphism
+            Console.WriteLine("\n🎯 Using Pattern Matching:");
+            foreach (var animal in animals)
+            {
+                string capability = animal switch
+                {
+                    Lion => "Can Walk 🚶",
+                    Elephant => "Can Walk & Swim 🚶🏊",
+                    Eagle => "Can Fly 🦅",
+                    Penguin => "Can Swim 🏊",
+                    _ => "Unknown"
+                };
+                Console.WriteLine($"  {animal.Name}: {capability}");
+            }
+        }
+        #endregion
+
+        #region Example 5: Error Handling
+        static void ErrorHandlingExample()
+        {
+            Console.WriteLine("⚠️ Example 5: معالجة الأخطاء والتحقق من المدخلات");
+            Console.WriteLine(new string('-', 50));
+
+            var cage = new Cage("Test Cage", 50.0, 30.0, false, true);
+            var lion = new Lion("Test Lion", 5, true);
+
+            // ✅ Example 1: إضافة حيوان بنجاح
+            try
+            {
+                Console.WriteLine("\n✅ Test 1: Adding animal successfully");
+                cage.AddAnimal(lion);
+                Console.WriteLine($"  Success: {lion.Name} added to {cage.Name}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"  Error: {ex.Message}");
+            }
+
+            // ❌ Example 2: محاولة إضافة نفس الحيوان مرتين
+            try
+            {
+                Console.WriteLine("\n❌ Test 2: Adding same animal twice");
+                cage.AddAnimal(lion);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine($"  Expected Error: {ex.Message}");
+            }
+
+            // ❌ Example 3: محاولة إضافة null
+            try
+            {
+                Console.WriteLine("\n❌ Test 3: Adding null animal");
+                cage.AddAnimal(null!);
+            }
+            catch (ArgumentNullException ex)
+            {
+                Console.WriteLine($"  Expected Error: {ex.Message}");
+            }
+
+            // ❌ Example 4: إنشاء حيوان بعمر سالب
+            try
+            {
+                Console.WriteLine("\n❌ Test 4: Creating animal with negative age");
+                var invalidAnimal = new Lion("Invalid", 0, true);
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                Console.WriteLine($"  Expected Error: {ex.Message}");
+            }
+
+            // ❌ Example 5: إنشاء enclosure بأبعاد سالبة
+            try
+            {
+                Console.WriteLine("\n❌ Test 5: Creating enclosure with negative dimensions");
+                var invalidCage = new Cage("Invalid Cage", -10.0, 50.0, false, true);
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                Console.WriteLine($"  Expected Error: {ex.Message}");
+            }
+
+            // ✅ Example 6: إزالة حيوان بنجاح
+            try
+            {
+                Console.WriteLine("\n✅ Test 6: Removing animal successfully");
+                cage.RemoveAnimal(lion);
+                Console.WriteLine($"  Success: {lion.Name} removed from {cage.Name}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"  Error: {ex.Message}");
+            }
+
+            // ❌ Example 7: محاولة إزالة حيوان غير موجود
+            try
+            {
+                Console.WriteLine("\n❌ Test 7: Removing non-existent animal");
+                var anotherLion = new Lion("Another Lion", 3, true);
+                cage.RemoveAnimal(anotherLion);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine($"  Expected Error: {ex.Message}");
+            }
+        }
+        #endregion
+        **/
+            #endregion
+        }
+
     }
 }
+
