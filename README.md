@@ -70,24 +70,24 @@
 ### الطريقة الثانية: البحث عن موضوع معين
 
 ```
-<<<<<<< HEAD
+
 📁 اختار الموضوع اللي عايز تتعلمه (مثلاً: 02-Abstraction)
    └── 📄 اقرأ README.md - شرح المفهوم
    └── 📁 Examples - شوف الأمثلة
    └── 📁 Exercises - حل التمارين
    └── 📁 RealWorldScenarios - شوف تطبيقات واقعية
-=======
+
 01-Encapsulation        ██████████ 100%  ✅
 02-Abstraction          ██████████ 100%  ✅
 03-Inheritance          ██████████ 100%  ✅
 04-Polymorphism         ██████████ 100%  ✅
 05-Interfaces           ██████████ 100%  ✅
 06-AbstractClasses      ██████████ 100%  ✅
-07-SOLID-Principles     ██░░░░░░░░ 10%  
+07-SOLID-Principles     ██░░░░░░░░ 10%
 08-DesignPatterns       ░░░░░░░░░░   0%  (قريباً)
 
 الإجمالي: ~25%
->>>>>>> f4ae77a (Update README.md)
+
 ```
 
 ---
@@ -282,6 +282,8 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file for
 
 </div>
 
+<<<<<<< HEAD
 
-
->>>>>>> f4ae77a (Update README.md)
+> > > > > > > # f4ae77a (Update README.md)
+> > > > > > >
+> > > > > > > f4ae77a (Update README.md)
