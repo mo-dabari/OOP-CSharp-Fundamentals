@@ -74,7 +74,7 @@
 04-Polymorphism         ██████████ 100%  ✅
 05-Interfaces           ██████████ 100%  ✅
 06-AbstractClasses      ██████████ 100%  ✅
-07-SOLID-Principles     ░░░░░░░░░░   0%  (قريباً)
+07-SOLID-Principles     ██░░░░░░░░ 10%  
 08-DesignPatterns       ░░░░░░░░░░   0%  (قريباً)
 
 الإجمالي: ~25%
@@ -603,5 +603,6 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file for
 ⭐ Star this repo if you find it helpful!
 
 </div>
+
 
 
