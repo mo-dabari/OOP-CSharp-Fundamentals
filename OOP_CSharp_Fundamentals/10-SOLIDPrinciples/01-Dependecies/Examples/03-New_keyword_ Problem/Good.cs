@@ -1,7 +1,17 @@
-// ✅ الطريقة الصحيحة - Dependency Injection
-namespace GoodExample
+using System;
+using System.Collections.Generic;
+
+namespace NewkeywordProblem.GoodExample
 {
-    // تعريف Abstractions
+    // Domain Model
+    public class Order
+    {
+        public int Id { get; set; }
+        public string ProductName { get; set; }
+        public decimal TotalAmount { get; set; }
+    }
+
+    // ✅ Abstractions
     public interface IOrderRepository
     {
         void Save(Order order);
@@ -18,7 +28,7 @@ namespace GoodExample
         void LogError(string message);
     }
 
-    // Implementations
+    // ✅ Implementations
     public class SqlOrderRepository : IOrderRepository
     {
         private readonly string _connectionString;
@@ -30,7 +40,7 @@ namespace GoodExample
 
         public void Save(Order order)
         {
-            Console.WriteLine($"Saving to {_connectionString}");
+            Console.WriteLine($"Saving order {order.Id} to {_connectionString}");
         }
     }
 
@@ -45,7 +55,7 @@ namespace GoodExample
 
         public void SendOrderConfirmation(Order order)
         {
-            Console.WriteLine($"Sending email via {_smtpServer}");
+            Console.WriteLine($"Sending confirmation email for order {order.Id} via {_smtpServer}");
         }
     }
 
@@ -62,55 +72,53 @@ namespace GoodExample
         }
     }
 
-    // ✅ OrderService يستقبل كل الـ dependencies من الخارج
+    // ✅ OrderService - يعتمد على Abstractions فقط
     public class OrderService
     {
         private readonly IOrderRepository _repository;
         private readonly IEmailService _emailService;
         private readonly ILogger _logger;
 
-        // ✅ Constructor Injection - كل الـ dependencies واضحة
         public OrderService(
             IOrderRepository repository,
             IEmailService emailService,
             ILogger logger)
         {
-            _repository = repository;
-            _emailService = emailService;
-            _logger = logger;
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _emailService = emailService ?? throw new ArgumentNullException(nameof(emailService));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public void CreateOrder(Order order)
         {
             try
             {
-                // ✅ مفيش new في Business Logic
                 _repository.Save(order);
                 _emailService.SendOrderConfirmation(order);
-                _logger.Log("Order created successfully");
+                _logger.Log($"Order {order.Id} created successfully");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                _logger.LogError($"Failed to create order: {ex.Message}");
                 throw;
             }
         }
     }
 
-    // ✅ Composition Root - المكان الوحيد اللي فيه new
+    // ✅ Composition Root - Manual DI
     public class Program
     {
         public static void Main()
         {
-            // ✅ إنشاء الـ dependencies هنا فقط
+            // إنشاء الـ dependencies
             var connectionString = "Server=localhost;Database=Orders;";
             var smtpServer = "smtp.gmail.com";
 
-            var repository = new SqlOrderRepository(connectionString);
-            var emailService = new EmailService(smtpServer);
-            var logger = new ConsoleLogger();
+            IOrderRepository repository = new SqlOrderRepository(connectionString);
+            IEmailService emailService = new EmailService(smtpServer);
+            ILogger logger = new ConsoleLogger();
 
-            // ✅ Inject الـ dependencies
+            // حقن الـ dependencies
             var orderService = new OrderService(repository, emailService, logger);
 
             // استخدام الـ service
@@ -124,14 +132,51 @@ namespace GoodExample
             orderService.CreateOrder(order);
         }
     }
+}
 
-    // ✅ Unit Test - سهل جداً
+// ✅ Unit Tests - استخدام مكتبة Moq الحقيقية
+// Install-Package Moq
+/*
+using Moq;
+using Xunit;
+
+namespace NewkeywordProblem.GoodExample.Tests
+{
     public class OrderServiceTests
     {
+        [Fact]
         public void CreateOrder_ShouldSaveAndSendEmail()
         {
-            // Arrange - إنشاء Mocks
+            // Arrange
             var mockRepository = new Mock<IOrderRepository>();
+            var mockEmailService = new Mock<IEmailService>();
+            var mockLogger = new Mock<ILogger>();
+
+            var service = new OrderService(
+                mockRepository.Object,
+                mockEmailService.Object,
+                mockLogger.Object
+            );
+
+            var order = new Order { Id = 1, ProductName = "Test", TotalAmount = 100 };
+
+            // Act
+            service.CreateOrder(order);
+
+            // Assert
+            mockRepository.Verify(r => r.Save(order), Times.Once);
+            mockEmailService.Verify(e => e.SendOrderConfirmation(order), Times.Once);
+            mockLogger.Verify(l => l.Log(It.IsAny<string>()), Times.Once);
+        }
+
+        [Fact]
+        public void CreateOrder_WhenRepositoryFails_ShouldLogError()
+        {
+            // Arrange
+            var mockRepository = new Mock<IOrderRepository>();
+            mockRepository.Setup(r => r.Save(It.IsAny<Order>()))
+                         .Throws(new Exception("Database error"));
+
             var mockEmailService = new Mock<IEmailService>();
             var mockLogger = new Mock<ILogger>();
 
@@ -143,17 +188,21 @@ namespace GoodExample
 
             var order = new Order { Id = 1 };
 
-            // Act
-            service.CreateOrder(order);
-
-            // Assert
-            mockRepository.Verify(r => r.Save(order), Times.Once);
-            mockEmailService.Verify(e => e.SendOrderConfirmation(order), Times.Once);
-            mockLogger.Verify(l => l.Log(It.IsAny<string>()), Times.Once);
+            // Act & Assert
+            Assert.Throws<Exception>(() => service.CreateOrder(order));
+            mockLogger.Verify(l => l.LogError(It.IsAny<string>()), Times.Once);
         }
     }
+}
+*/
 
-    // ✅ أو باستخدام DI Container (مثل Microsoft.Extensions.DependencyInjection)
+// ✅ استخدام DI Container
+// Install-Package Microsoft.Extensions.DependencyInjection
+/*
+using Microsoft.Extensions.DependencyInjection;
+
+namespace NewkeywordProblem.GoodExample
+{
     public class ProgramWithDIContainer
     {
         public static void Main()
@@ -167,12 +216,14 @@ namespace GoodExample
             services.AddScoped<IEmailService>(sp =>
                 new EmailService("smtp.gmail.com"));
             services.AddSingleton<ILogger, ConsoleLogger>();
+
+            // ✅ تسجيل OrderService نفسه
             services.AddScoped<OrderService>();
 
             var serviceProvider = services.BuildServiceProvider();
 
-            // ✅ الـ Container هيحقن الـ dependencies تلقائياً
-            var orderService = serviceProvider.GetService<OrderService>();
+            // الـ Container يحقن الـ dependencies تلقائياً
+            var orderService = serviceProvider.GetRequiredService<OrderService>();
 
             var order = new Order
             {
@@ -185,35 +236,4 @@ namespace GoodExample
         }
     }
 }
-
-// Dummy Mock class للتوضيح
-public class Mock<T> where T : class
-{
-    public T Object { get; }
-    public void Verify(Action<T> expression, Times times) { }
-}
-
-public class Times
-{
-    public static Times Once => new Times();
-}
-
-public class It
-{
-    public static T IsAny<T>() => default(T);
-}
-
-public class ServiceCollection : List<object>
-{
-    public void AddScoped<TInterface, TImplementation>() where TImplementation : TInterface { }
-    public void AddScoped<TInterface>(Func<object, TInterface> factory) { }
-    public void AddSingleton<TInterface, TImplementation>() where TImplementation : TInterface { }
-    public object BuildServiceProvider() => null;
-}
-
-public class Order
-{
-    public int Id { get; set; }
-    public string ProductName { get; set; }
-    public decimal TotalAmount { get; set; }
-}
+*/
