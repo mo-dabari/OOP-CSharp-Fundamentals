@@ -1,5 +1,8 @@
+using System;
+
 // ✅ مثال متقدم: استخدام Moq Library
-namespace GoodExample_WithMoq
+
+namespace Untestability.Good.Moq
 {
     // في الواقع، نستخدم Mocking Framework مثل Moq
     // بدل ما نكتب Fake Implementations يدوياً
@@ -19,7 +22,7 @@ namespace GoodExample_WithMoq
             mockPaymentGateway.Setup(p => p.Charge(100, It.IsAny<string>()))
                 .Returns(new PaymentResult { Success = true });
 
-            var service = new GoodExample.OrderService(
+            var service = new OrderService(
                 mockRepository.Object,
                 mockEmailService.Object,
                 mockPaymentGateway.Object
@@ -40,7 +43,70 @@ namespace GoodExample_WithMoq
         }
     }
 
-    // Dummy Mock class
+    // نفس Abstractions
+    public interface IOrderRepository
+    {
+        Order GetById(int id);
+        void Update(Order order);
+    }
+
+    public interface IEmailService
+    {
+        void Send(string to, string subject, string body);
+    }
+
+    public interface IPaymentGateway
+    {
+        PaymentResult Charge(decimal amount, string creditCard);
+    }
+
+
+    public class OrderService
+    {
+        private readonly IOrderRepository _repo;
+        private readonly IEmailService _email;
+        private readonly IPaymentGateway _payment;
+
+        public OrderService(
+            IOrderRepository repo,
+            IEmailService email,
+            IPaymentGateway payment)
+        {
+            _repo = repo;
+            _email = email;
+            _payment = payment;
+        }
+
+        public void ProcessOrder(int orderId)
+        {
+            var order = _repo.GetById(orderId);
+            var result = _payment.Charge(order.TotalAmount, order.CreditCard);
+
+            if (!result.Success) return;
+            _email.Send(
+                    order.CustomerEmail,
+                    "Order Confirmation",
+                    $"Your order #{orderId} has been confirmed"
+                );
+        }
+    }
+
+    public class Order
+    {
+        public int Id { get; set; }
+        public decimal TotalAmount { get; set; }
+        public string CustomerEmail { get; set; }
+        public string CreditCard { get; set; }
+        public string Status { get; set; }
+    }
+
+    public class PaymentResult
+    {
+        public bool Success { get; set; }
+    }
+
+
+    // ❌ Dummy Mock class
     public class Mock<T> where T : class
     {
         public T Object { get; }
@@ -53,11 +119,9 @@ namespace GoodExample_WithMoq
     {
         public static Times Once => new Times();
     }
-
     public class It
     {
         public static T IsAny<T>() => default(T);
         public static T Is<T>(Func<T, bool> predicate) => default(T);
     }
-
 }

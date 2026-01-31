@@ -1,5 +1,5 @@
 // ❌ الطريقة الخاطئة
-namespace Bad
+namespace InappropriateIntimacy.EmployeePayroll.Bad
 {
     public class Employee
     {

@@ -67,4 +67,9 @@ namespace GoodExample_IntroduceInterface
     // ✅ في الـ Unit Test:
     // var mockRepo = new Mock<IOrderRepository>();
     // var service = new OrderService(mockRepo.Object);
+
+    public class Order
+    {
+        public int Id { get; set; }
+    }
 }

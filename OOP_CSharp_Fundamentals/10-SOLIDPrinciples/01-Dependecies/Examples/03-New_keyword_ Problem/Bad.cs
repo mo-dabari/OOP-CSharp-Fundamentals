@@ -3,7 +3,7 @@
 // ====================================
 
 // ❌ الطريقة الخاطئة - استخدام new في Business Logic
-namespace BadExample
+namespace NewkeywordProblem.BadExample
 {
     public class OrderService
     {

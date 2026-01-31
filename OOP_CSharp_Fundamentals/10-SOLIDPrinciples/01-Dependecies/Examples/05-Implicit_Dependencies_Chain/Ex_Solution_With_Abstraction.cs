@@ -1,5 +1,5 @@
 // ✅ الطريقة الصحيحة - كسر السلسلة بـ Abstractions
-namespace GoodExample
+namespace ImplicitDependenciesChain.GoodExample
 {
     // تعريف Abstractions لكل طبقة
     public interface IOrderService
@@ -170,4 +170,24 @@ namespace GoodExample
             // ✅ اختبرنا OrderService بدون ما نعتمد على Database
         }
     }
+
+    // ❌ Dummy Mock class
+    public class Mock<T> where T : class
+    {
+        public T Object { get; }
+        public Mock<T> Setup(Func<T, object> expression) => this;
+        public Mock<T> Returns(object value) => this;
+        public void Verify(Action<T> expression, Times times) { }
+    }
+
+    public class Times
+    {
+        public static Times Once => new Times();
+    }
+    public class It
+    {
+        public static T IsAny<T>() => default(T);
+        public static T Is<T>(Func<T, bool> predicate) => default(T);
+    }
+
 }

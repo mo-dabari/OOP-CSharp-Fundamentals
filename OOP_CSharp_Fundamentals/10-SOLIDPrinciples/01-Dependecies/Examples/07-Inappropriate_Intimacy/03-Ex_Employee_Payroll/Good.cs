@@ -1,5 +1,5 @@
 // ✅ الطريقة الصحيحة
-namespace Good
+namespace InappropriateIntimacy.EmployeePayroll.Good
 {
     public class Employee
     {

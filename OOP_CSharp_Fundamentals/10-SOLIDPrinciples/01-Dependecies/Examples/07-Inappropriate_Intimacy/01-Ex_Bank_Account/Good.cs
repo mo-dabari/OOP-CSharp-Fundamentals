@@ -1,5 +1,5 @@
 // ✅ الطريقة الصحيحة
-namespace Good
+namespace InappropriateIntimacy.BankAccount.Good
 {
     public class BankAccount
     {

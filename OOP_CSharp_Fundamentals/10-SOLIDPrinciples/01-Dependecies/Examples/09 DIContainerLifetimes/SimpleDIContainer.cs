@@ -1,35 +1,41 @@
-// ====================================
-// Simple DI Container
-// ====================================
-public class SimpleDIContainer
+using DIContainerLifetimes.Types.Scoped;
+using DIContainerLifetimes.Types.Singleton;
+
+namespace DIContainerLifetimes
 {
-    private readonly Dictionary<Type, Func<object>> _transientServices = new();
-    private readonly Dictionary<Type, Func<object>> _scopedFactories = new();
-    private readonly Dictionary<Type, object> _singletonInstances = new();
-
-    // Register Singleton
-    public void RegisterSingleton<TInterface, TImplementation>()
-        where TImplementation : TInterface, new()
+    // ====================================
+    // Simple DI Container
+    // ====================================
+    public class SimpleDIContainer
     {
-        _singletonInstances[typeof(TInterface)] = new TImplementation();
-    }
+        private readonly Dictionary<Type, Func<object>> _transientServices = new();
+        private readonly Dictionary<Type, Func<object>> _scopedFactories = new();
+        private readonly Dictionary<Type, object> _singletonInstances = new();
 
-    // Register Scoped
-    public void RegisterScoped<TInterface>(Func<object> factory)
-    {
-        _scopedFactories[typeof(TInterface)] = factory;
-    }
+        // Register Singleton
+        public void RegisterSingleton<TInterface, TImplementation>()
+            where TImplementation : TInterface, new()
+        {
+            _singletonInstances[typeof(TInterface)] = new TImplementation();
+        }
 
-    // Register Transient
-    public void RegisterTransient<TInterface>(Func<object> factory)
-    {
-        _transientServices[typeof(TInterface)] = factory;
-    }
+        // Register Scoped
+        public void RegisterScoped<TInterface>(Func<object> factory)
+        {
+            _scopedFactories[typeof(TInterface)] = factory;
+        }
 
-    // Create Scope
-    public Scope CreateScope()
-    {
-        return new Scope(_transientServices, _scopedFactories, _singletonInstances);
+        // Register Transient
+        public void RegisterTransient<TInterface>(Func<object> factory)
+        {
+            _transientServices[typeof(TInterface)] = factory;
+        }
+
+        // Create Scope
+        public Scope CreateScope()
+        {
+            return new Scope(_transientServices, _scopedFactories, _singletonInstances);
+        }
     }
 
     // Nested Scope class
@@ -86,6 +92,23 @@ public class SimpleDIContainer
         }
     }
 
+    public class TransientEmailService : IEmailService
+    {
+        public Guid InstanceId { get; } = Guid.NewGuid();
+        private readonly ILogger _logger;
+
+        public TransientEmailService(ILogger logger)
+        {
+            _logger = logger;
+            Console.WriteLine($"[TRANSIENT] EmailService created: {InstanceId}");
+        }
+
+        public void Send(string email, string message)
+        {
+            _logger.Log($"EmailService {InstanceId} sending to: {email}");
+            Console.WriteLine($"[{InstanceId}] Email sent to {email}: {message}");
+        }
+    }
     // ====================================
     // Demo Program
     // ====================================
@@ -169,5 +192,22 @@ public class SimpleDIContainer
             Console.WriteLine("🔄 Transient:  Instance جديد مع كل Resolve");
             Console.WriteLine(new string('=', 80) + "\n");
         }
+    }
+    public interface IEmailService
+    {
+        Guid InstanceId { get; }
+        void Send(string email, string message);
+    }
+
+    public interface IUserRepository
+    {
+        Guid InstanceId { get; }
+        public void Save(string user);
+    }
+
+    public interface ILogger
+    {
+        Guid InstanceId { get; }
+        void Log(string message);
     }
 }

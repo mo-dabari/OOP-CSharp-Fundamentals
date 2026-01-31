@@ -1,16 +1,18 @@
-// ====================================
-// ⚠️ Common Mistakes
-// ====================================
-public class CommonMistakes
+namespace DIContainerLifetimes
 {
-    public static void ShowMistakes()
+    // ====================================
+    // ⚠️ Common Mistakes
+    // ====================================
+    public class CommonMistakes
     {
-        Console.WriteLine("\n" + new string('=', 80));
-        Console.WriteLine("⚠️ أخطاء شائعة في Lifetimes");
-        Console.WriteLine(new string('=', 80) + "\n");
+        public static void ShowMistakes()
+        {
+            Console.WriteLine("\n" + new string('=', 80));
+            Console.WriteLine("⚠️ أخطاء شائعة في Lifetimes");
+            Console.WriteLine(new string('=', 80) + "\n");
 
-        Console.WriteLine("❌ خطأ 1: Injecting Scoped Service في Singleton");
-        Console.WriteLine(@"
+            Console.WriteLine("❌ خطأ 1: Injecting Scoped Service في Singleton");
+            Console.WriteLine(@"
 // ❌ خطأ!
 services.AddSingleton<SingletonService>();
 services.AddScoped<ScopedService>();
@@ -25,8 +27,8 @@ class SingletonService
 ✅ الحل: Singleton يستخدم Singleton أو Transient فقط
 ");
 
-        Console.WriteLine("\n❌ خطأ 2: DbContext كـ Singleton");
-        Console.WriteLine(@"
+            Console.WriteLine("\n❌ خطأ 2: DbContext كـ Singleton");
+            Console.WriteLine(@"
 // ❌ كارثة!
 services.AddSingleton<DbContext>();
 
@@ -39,8 +41,8 @@ services.AddSingleton<DbContext>();
 services.AddScoped<DbContext>();
 ");
 
-        Console.WriteLine("\n❌ خطأ 3: Transient Services ثقيلة");
-        Console.WriteLine(@"
+            Console.WriteLine("\n❌ خطأ 3: Transient Services ثقيلة");
+            Console.WriteLine(@"
 // ❌ مش فعّال
 services.AddTransient<HeavyService>(); // Constructor فيه I/O operations
 
@@ -51,6 +53,7 @@ services.AddTransient<HeavyService>(); // Constructor فيه I/O operations
 ✅ الحل: استخدم Scoped أو Singleton حسب الحاجة
 ");
 
-        Console.WriteLine(new string('=', 80) + "\n");
+            Console.WriteLine(new string('=', 80) + "\n");
+        }
     }
 }

@@ -85,11 +85,11 @@ namespace GoodExample_IntroduceMediator
     // mediator.RegisterHandler<CreateOrderRequest, CreateOrderHandler>(new CreateOrderHandler(mediator));
     // mediator.RegisterHandler<SendEmailRequest, SendEmailHandler>(new SendEmailHandler());
     // mediator.Send(new CreateOrderRequest { Order = new Order() });
+    public class Order
+    {
+        public int Id { get; set; }
+        public string ProductName { get; set; }
+        public decimal TotalAmount { get; set; }
+    }
 }
 
-public class Order
-{
-    public int Id { get; set; }
-    public string ProductName { get; set; }
-    public decimal TotalAmount { get; set; }
-}

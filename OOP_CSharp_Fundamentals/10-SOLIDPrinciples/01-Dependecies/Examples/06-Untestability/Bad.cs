@@ -1,9 +1,5 @@
-// ====================================
-// Untestability - صعوبة الاختبار
-// ====================================
-
 // ❌ الطريقة الخاطئة - كود غير قابل للاختبار
-namespace BadExample
+namespace Untestability.BadExample
 {
     public class OrderService
     {
@@ -77,25 +73,17 @@ namespace BadExample
         }
     }
 
-    // ❌ محاولة عمل Unit Test - فاشلة!
-    public class OrderServiceTests
+    public class Order
     {
-        public void ProcessOrder_ShouldUpdateOrderStatus()
-        {
-            // ❌ المشاكل:
-            // 1. محتاجين SQL Server شغال
-            // 2. محتاجين SMTP Server شغال
-            // 3. محتاجين Stripe API شغال (أو Test Mode)
-            // 4. الاختبار بطيء جداً (I/O operations)
-            // 5. لو أي service فشل، الاختبار هيفشل
-            // 6. ممكن نخصم فلوس حقيقية من بطاقة!
+        public int Id { get; set; }
+        public decimal TotalAmount { get; set; }
+        public string Status { get; set; }
+        public string CustomerEmail { get; set; }
+        public string CreditCard { get; set; }
+    }
 
-            var service = new OrderService();
-
-            // هيفشل لأننا مش متصلين بـ Database حقيقي
-            // service.ProcessOrder(1);
-
-            Console.WriteLine("Cannot test this code without real dependencies!");
-        }
+    public class PaymentResult
+    {
+        public bool Success { get; set; }
     }
 }
