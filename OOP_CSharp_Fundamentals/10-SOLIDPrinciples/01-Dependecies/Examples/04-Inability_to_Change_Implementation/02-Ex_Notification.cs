@@ -63,7 +63,7 @@ namespace InabilitytoChangeImplementation.GoodExample_Notification
     // ✅ الاستخدام
     public class Program
     {
-        public static void Main()
+        public static void Main4()
         {
             var channels = new List<INotificationChannel>
             {

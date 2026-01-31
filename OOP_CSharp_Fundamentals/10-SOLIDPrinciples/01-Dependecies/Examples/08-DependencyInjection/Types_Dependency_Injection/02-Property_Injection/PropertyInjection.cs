@@ -43,7 +43,7 @@ namespace PropertyInjection
         }
 
         // ⚠️ Optional Dependency كـ Property
-        public ICache Cache { get; set; }
+        public ICache? Cache { get; set; }
 
         public Product GetProduct(int id)
         {
