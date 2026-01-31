@@ -206,7 +206,7 @@ namespace Untestability.Good.Fakes
     // ✅ تشغيل الاختبارات
     public class Program
     {
-        public static void Main()
+        public static void Main6()
         {
             var tests = new OrderServiceTests();
 

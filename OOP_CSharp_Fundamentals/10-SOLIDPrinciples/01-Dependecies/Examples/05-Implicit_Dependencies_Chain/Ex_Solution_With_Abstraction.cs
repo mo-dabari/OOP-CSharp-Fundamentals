@@ -112,7 +112,7 @@ namespace ImplicitDependenciesChain.GoodExample
     // ✅ Composition Root - المكان الوحيد للـ wiring
     public class Program
     {
-        public static void Main()
+        public static void Main5()
         {
             // ✅ بناء السلسلة من الآخر للأول
             var connectionString = "Server=localhost;Database=Shop;";

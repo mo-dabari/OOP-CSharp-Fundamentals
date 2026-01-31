@@ -108,7 +108,7 @@ namespace NewkeywordProblem.GoodExample
     // ✅ Composition Root - Manual DI
     public class Program
     {
-        public static void Main()
+        public static void Main2()
         {
             // إنشاء الـ dependencies
             var connectionString = "Server=localhost;Database=Orders;";

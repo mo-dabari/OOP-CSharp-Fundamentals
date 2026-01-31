@@ -109,7 +109,7 @@ namespace InabilitytoChangeImplementation.GoodExample_Strategy
     // ✅ Composition Root
     public class Program
     {
-        public static void Main()
+        public static void Main3()
         {
             // تسجيل كل الاستراتيجيات
             var strategies = new List<IPaymentStrategy>

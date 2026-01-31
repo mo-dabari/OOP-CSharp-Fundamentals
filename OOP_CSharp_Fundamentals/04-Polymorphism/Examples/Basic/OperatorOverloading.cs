@@ -60,7 +60,7 @@ namespace Polymorphism.Examples.Basic
             return $"{Numerator}/{Denominator}";
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is Fraction f)
                 return this == f;
