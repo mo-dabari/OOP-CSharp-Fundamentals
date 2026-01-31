@@ -4,7 +4,7 @@
 
 // ❌ الطريقة الخاطئة - Circular Dependency
 // المشكلة: A يعتمد على B، B يعتمد على C، C يعتمد على A
-namespace BadExample
+namespace CircularDependency.BadExample
 {
     public class OrderService
     {

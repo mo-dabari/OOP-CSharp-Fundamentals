@@ -4,7 +4,7 @@
 // ====================================
 
 // ❌ الطريقة الخاطئة - Implementation محدد ومش قابل للتغيير
-namespace BadExample
+namespace InabilitytoChangeImplementation.BadExample
 {
     // مثال: نظام دفع في متجر إلكتروني
     public class PaymentService

@@ -3,7 +3,7 @@
 // ====================================
 
 // ❌ الطريقة الخاطئة - Tight Coupling
-namespace BadExample
+namespace TightCoupling.BadExample
 {
     public class OrderService
     {
@@ -45,4 +45,9 @@ namespace BadExample
     // 1. لو عايز أغير من SQL لـ MongoDB؟ --> لازم أعدل OrderService
     // 2. مينفعش أعمل Unit Test --> محتاج SQL Database شغال
     // 3. مينفعش أستخدم OrderService في أكثر من context
+
+    public class Order
+    {
+        public int Id { get; set; }
+    }
 }

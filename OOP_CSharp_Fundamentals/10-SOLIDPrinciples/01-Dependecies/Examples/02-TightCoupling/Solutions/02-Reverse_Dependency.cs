@@ -40,7 +40,7 @@ namespace GoodExample_ReverseDependency
 
         public Order GetById(int id)
         {
-            return new Order { Id = id };
+            return new Order { };
         }
     }
 

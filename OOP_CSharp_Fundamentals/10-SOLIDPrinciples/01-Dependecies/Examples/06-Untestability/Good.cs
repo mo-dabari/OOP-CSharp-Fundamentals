@@ -1,5 +1,5 @@
 // ✅ الطريقة الصحيحة - كود قابل للاختبار
-namespace GoodExample
+namespace Untestabilit.GoodExample
 {
     // تعريف Abstractions
     public interface IOrderRepository

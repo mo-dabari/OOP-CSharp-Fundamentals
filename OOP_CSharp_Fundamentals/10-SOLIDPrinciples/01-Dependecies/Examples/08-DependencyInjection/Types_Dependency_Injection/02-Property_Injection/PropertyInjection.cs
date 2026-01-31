@@ -1,6 +1,8 @@
 // ====================================
 // 2️⃣ Property Injection - استخدام نادر
 // ====================================
+using MethodInjection;
+
 namespace PropertyInjection
 {
     public interface ILogger

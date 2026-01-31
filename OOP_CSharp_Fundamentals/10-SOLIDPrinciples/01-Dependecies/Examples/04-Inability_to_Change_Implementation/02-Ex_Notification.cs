@@ -1,5 +1,5 @@
 // ✅ مثال آخر: نظام Notification
-namespace GoodExample_Notification
+namespace InabilitytoChangeImplementation.GoodExample_Notification
 {
     // الـ Abstraction
     public interface INotificationChannel
@@ -89,9 +89,9 @@ namespace GoodExample_Notification
             // بدون تعديل على NotificationService!
         }
     }
+    public class Order
+    {
+        public decimal TotalAmount { get; set; }
+    }
 }
 
-public class Order
-{
-    public decimal TotalAmount { get; set; }
-}

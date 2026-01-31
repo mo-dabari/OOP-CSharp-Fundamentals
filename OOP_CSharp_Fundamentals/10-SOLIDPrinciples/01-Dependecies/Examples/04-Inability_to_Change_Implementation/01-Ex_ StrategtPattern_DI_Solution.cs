@@ -1,5 +1,5 @@
 // ✅ الطريقة الصحيحة - Strategy Pattern + DI
-namespace GoodExample_Strategy
+namespace InabilitytoChangeImplementation.GoodExample_Strategy
 {
     // تعريف Abstraction للـ Payment
     public interface IPaymentStrategy

@@ -1,5 +1,5 @@
 // ✅ الطريقة الصحيحة - كسر الـ Circular Dependency
-namespace GoodExample
+namespace CircularDependency.GoodExample
 {
     // الحل: استخدام Events أو Interfaces لكسر الدائرة
 
@@ -66,9 +66,9 @@ namespace GoodExample
     // var orderService = new OrderService(paymentService);
     // var paymentService = new PaymentService(notificationService);
     // var notificationService = new NotificationService(orderService); // orderService implements IDiscountCalculator
+    public class Order
+    {
+        public decimal TotalAmount { get; set; }
+    }
 }
 
-public class Order
-{
-    public decimal TotalAmount { get; set; }
-}

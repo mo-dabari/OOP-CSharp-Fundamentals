@@ -4,7 +4,7 @@
 // ====================================
 
 // ❌ الطريقة الخاطئة - سلسلة طويلة من Dependencies
-namespace BadExample
+namespace ImplicitDependenciesChain.BadExample
 {
     // A => B => C => D => E
     // المشكلة: A يعتمد على E بشكل ضمني!

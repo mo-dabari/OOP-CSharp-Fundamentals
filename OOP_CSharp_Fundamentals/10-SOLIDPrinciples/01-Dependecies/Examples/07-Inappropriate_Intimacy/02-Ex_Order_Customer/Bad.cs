@@ -3,7 +3,7 @@
 // ====================================
 
 // ❌ الطريقة الخاطئة - كلاس يعرف تفاصيل داخلية عن كلاس آخر
-namespace BadExample
+namespace InappropriateIntimacy.OrderCustomer.BadExample
 {
     // مثال: Order و Customer
     public class Order

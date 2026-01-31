@@ -1,5 +1,7 @@
 // ✅ مثال آخر: تقليل السلسلة بـ Facade Pattern
-namespace GoodExample_Facade
+using ImplicitDependenciesChain.GoodExample;
+
+namespace ImplicitDependenciesChain.GoodExample_Facade
 {
     // بدل ما يكون عندنا سلسلة طويلة
     // نعمل Facade يخفي التعقيد

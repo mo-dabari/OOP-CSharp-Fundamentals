@@ -1,5 +1,5 @@
 // ✅ الطريقة الصحيحة - Proper Encapsulation
-namespace GoodExample
+namespace InappropriateIntimacy.OrderCustomer.GoodExample
 {
     public class Order
     {

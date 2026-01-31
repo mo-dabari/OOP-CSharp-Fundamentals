@@ -1,29 +1,33 @@
-// ====================================
-// 3️⃣ Transient - Instance جديد مع كل استخدام
-// ====================================
-public class TransientEmailService : IEmailService
+namespace DIContainerLifetimes.Types.Transient
 {
-    public Guid InstanceId { get; } = Guid.NewGuid();
-    private readonly ILogger _logger;
-
-    public TransientEmailService(ILogger logger)
+    // ====================================
+    // 3️⃣ Transient - Instance جديد مع كل استخدام
+    // ====================================
+    public class TransientEmailService : IEmailService
     {
-        _logger = logger;
-        Console.WriteLine($"[TRANSIENT] EmailService created: {InstanceId}");
+        public Guid InstanceId { get; } = Guid.NewGuid();
+        private readonly ILogger _logger;
+
+        public TransientEmailService(ILogger logger)
+        {
+            _logger = logger;
+            Console.WriteLine($"[TRANSIENT] EmailService created: {InstanceId}");
+        }
+
+        public void Send(string email, string message)
+        {
+            _logger.Log($"EmailService {InstanceId} sending to: {email}");
+            Console.WriteLine($"[{InstanceId}] Email sent to {email}: {message}");
+        }
     }
 
-    public void Send(string email, string message)
-    {
-        _logger.Log($"EmailService {InstanceId} sending to: {email}");
-        Console.WriteLine($"[{InstanceId}] Email sent to {email}: {message}");
-    }
+    // ✅ متى نستخدم Transient:
+    // - Services خفيفة وStateless
+    // - Services اللي كل Request محتاج نسخة منفصلة
+    // - لما مفيش State محتاج يتشارك
+
+    // ⚠️ تحذيرات Transient:
+    // - ممكن يسبب Performance Issues لو الـ Constructor ثقيل
+    // - زيادة في Memory Usage
+
 }
-
-// ✅ متى نستخدم Transient:
-// - Services خفيفة وStateless
-// - Services اللي كل Request محتاج نسخة منفصلة
-// - لما مفيش State محتاج يتشارك
-
-// ⚠️ تحذيرات Transient:
-// - ممكن يسبب Performance Issues لو الـ Constructor ثقيل
-// - زيادة في Memory Usage

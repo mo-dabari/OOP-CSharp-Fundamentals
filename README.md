@@ -70,11 +70,24 @@
 ### الطريقة الثانية: البحث عن موضوع معين
 
 ```
+<<<<<<< HEAD
 📁 اختار الموضوع اللي عايز تتعلمه (مثلاً: 02-Abstraction)
    └── 📄 اقرأ README.md - شرح المفهوم
    └── 📁 Examples - شوف الأمثلة
    └── 📁 Exercises - حل التمارين
    └── 📁 RealWorldScenarios - شوف تطبيقات واقعية
+=======
+01-Encapsulation        ██████████ 100%  ✅
+02-Abstraction          ██████████ 100%  ✅
+03-Inheritance          ██████████ 100%  ✅
+04-Polymorphism         ██████████ 100%  ✅
+05-Interfaces           ██████████ 100%  ✅
+06-AbstractClasses      ██████████ 100%  ✅
+07-SOLID-Principles     ██░░░░░░░░ 10%  
+08-DesignPatterns       ░░░░░░░░░░   0%  (قريباً)
+
+الإجمالي: ~25%
+>>>>>>> f4ae77a (Update README.md)
 ```
 
 ---
@@ -197,3 +210,78 @@
 [⬆ Back to Top](#-oop-c-fundamentals---أساسيات-البرمجة-الكائنية-في-سي-شارب)
 
 </div>
+<<<<<<< HEAD
+=======
+
+---
+
+# English Version
+
+## 🎯 OOP C# Fundamentals
+
+A comprehensive educational project for mastering Object-Oriented Programming (OOP) in C#.
+
+### 📊 Project Statistics
+
+- **26 C# files** with examples, exercises, and real-world scenarios
+- **~15,000+ lines** of high-quality code
+- **100% Arabic** comprehensive explanations
+- **3 completed topics**: Encapsulation (30%), Abstraction (100%), Inheritance (100%)
+
+### ✨ Key Features
+
+- **In-depth Explanations**: Detailed Arabic explanations for every concept
+- **Practical Examples**: 26+ real-world programming examples
+- **Solved Exercises**: 3+ exercises with complete solutions per concept
+- **Real-world Scenarios**: Complex projects simulating actual work environments
+- **Interview Questions**: 10+ common interview questions with model answers
+- **Best Practices**: Clean code standards and professional guidelines
+
+### 🗂️ Topics Covered
+
+1. **Encapsulation** - Data hiding, properties, access modifiers
+2. **Abstraction** - Abstract classes vs interfaces, polymorphism
+3. **Inheritance** - IS-A relationships, method overriding, sealed classes
+4. **Polymorphism** - Coming soon
+5. **Interfaces** - Coming soon
+6. **SOLID Principles** - Coming soon
+7. **Design Patterns** - Coming soon
+
+### 🚀 Getting Started
+
+```bash
+# Clone the repository
+git clone https://github.com/MohammedAbdullah01/OOP-CSharp-Fundamentals.git
+
+# Navigate to a topic
+cd 02-Abstraction/Examples
+
+# Run the examples
+dotnet run BasicAbstraction.cs
+```
+
+### 📖 Learning Path
+
+Follow the structured 8-week learning path in `LEARNING_PATH.md` to master OOP concepts progressively.
+
+### 🤝 Contributing
+
+Contributions are welcome! Please read `CONTRIBUTING.md` for guidelines.
+
+### 📜 License
+
+This project is licensed under the MIT License - see [LICENSE](LICENSE) file for details.
+
+---
+
+<div align="center">
+
+**Made with ❤️ for the Arab Developer Community**
+
+⭐ Star this repo if you find it helpful!
+
+</div>
+
+
+
+>>>>>>> f4ae77a (Update README.md)
